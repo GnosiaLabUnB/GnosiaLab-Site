@@ -1,0 +1,111 @@
+// Journal 4.3.1
+// // Bootswatch
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #eee;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #aaa;
+$gray-600: #777;
+$gray-700: #495057;
+$gray-800: #333;
+$gray-900: #222;
+$black: #000;
+$blue: #EB6864;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #F57A00;
+$orange: #fd7e14;
+$yellow: #F5E625;
+$green: #22B24C;
+$teal: #20c997;
+$cyan: #369;
+$primary: $blue;
+$secondary: $gray-500;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-900;
+
+// Variables ===================================================================
+
+$web-font-path: "https://fonts.googleapis.com/css?family=News+Cycle:400,700" !default;
+@import url($web-font-path);
+
+// Navbar ======================================================================
+
+.bg-dark {
+  background-color: #000 !important;
+}
+
+.bg-light {
+  background-color: $white !important;
+  color: $black;
+  border: 1px solid $gray-200;
+
+  &.navbar-fixed-top {
+    border-width: 0 0 1px 0;
+  }
+
+  &.navbar-fixed-bottom {
+    border-width: 1px 0 0 0;
+  }
+}
+
+.navbar {
+  font-size: 18px;
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+}
+
+.navbar-brand {
+  padding-top: 0.5rem;
+  font-size: inherit;
+  font-weight: $headings-font-weight;
+  text-transform: uppercase;
+}
+
+// Buttons =====================================================================
+
+.btn {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+
+  &-secondary,
+  &-warning {
+    color: $white;
+  }
+}
+
+// Typography ==================================================================
+
+// Tables ======================================================================
+
+// Forms =======================================================================
+
+// Navs ========================================================================
+
+.pagination {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+// Indicators ==================================================================
+
+// Progress bars ===============================================================
+
+// Containers ==================================================================
+
+
+
+// @import "bootstrap";
+@import './bootstrap.min.css';
