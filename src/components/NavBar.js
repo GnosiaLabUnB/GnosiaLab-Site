@@ -9,9 +9,12 @@ class NavBar extends React.Component {
         return (
             <Navbar bg="primary" variant="dark">
             <Container>
-              <Navbar.Brand href="#home">Gnosia Cerrado</Navbar.Brand>
+              <Navbar.Brand href="/">Banco de Extratos do Cerrado</Navbar.Brand>
               <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/search">Search</Nav.Link>
+                <Nav.Link href="/about">About</Nav.Link>
+                <Nav.Link href="/contact">Contact</Nav.Link>
               </Nav>
             </Container>
           </Navbar>

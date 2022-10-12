@@ -1,0 +1,9 @@
+
+
+.white_background {
+    background-color: white;
+}
+
+.gray_background {
+    background-color: $gray-100;
+}
