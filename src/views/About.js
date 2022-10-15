@@ -4,8 +4,8 @@ import NavBar from "../components/NavBar";
 import Image from 'react-bootstrap/Image'
 import ContentContainer from '../components/ContentContainer';
 import Row from 'react-bootstrap/Row';
-
 import MemberCard from '../components/MemberCard'
+import Footer from '../components/Footer';
 
 class About extends React.Component {
     render() {
@@ -22,7 +22,7 @@ class About extends React.Component {
                     <Image src={require("../assets/images/placeholder.png")} style={{height: '300px'}} fluid/>
                 </Col>
            </ContentContainer>
-            <ContentContainer color='lightgray'>
+            <ContentContainer color='var(--bs-blue)'>
                 <h2 style={{textAlign: "center", width:"100%"}}>Members</h2>
                 <Col lg={3}>
                     <Row>
@@ -82,11 +82,12 @@ class About extends React.Component {
                 </Col>
             </ContentContainer>
 
-            <ContentContainer color='lightgrey'>
+            <ContentContainer color='var(--bs-blue)'>
                 <h2 style={{textAlign: "center", width:"100%"}}>Partners</h2>
                 <Row>
                 </Row>
             </ContentContainer>
+            <Footer></Footer>
         </div>
       )
     }

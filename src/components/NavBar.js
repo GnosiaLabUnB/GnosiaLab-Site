@@ -7,14 +7,22 @@ import Nav from 'react-bootstrap/Nav';
 class NavBar extends React.Component {
     render() {
         return (
-            <Navbar bg="primary" variant="dark">
+            <Navbar bg="primary" variant="light">
             <Container>
-              <Navbar.Brand href="/">Banco de Extratos do Cerrado</Navbar.Brand>
-              <Nav className="me-auto">
+            <Navbar.Brand style={{color: 'white'}} href="/">
+              <img
+                alt=""
+                src="/logo.svg"
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+              />{' '}
+                Cerrado Database
+              </Navbar.Brand>
+              <Nav className="ml-auto">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/search">Search</Nav.Link>
                 <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/contact">Contact</Nav.Link>
               </Nav>
             </Container>
           </Navbar>
