@@ -57,7 +57,6 @@ class About extends React.Component {
                     </Row>
                 </Col>
             </ContentContainer>
-
             <ContentContainer color='white'>
                 <h2 style={{textAlign: "center", width:"100%"}}>Collaborators</h2>
                 <Col lg={3}>

@@ -7,7 +7,7 @@ class HomeCarrousel extends React.Component {
     render() {
         return (
             <Carousel style={{height: '66vh', width: '100%', color: 'var(--bs-primary)'}}>
-                <Carousel.Item>
+                <Carousel.Item style={{color: 'var(--bs-green)'}}>
                     <div className="d-block w-100" style={{ height: '66vh' }}>
                         <Row className="h-100">
                             <Col md={12} style={{marginTop: '125px'}}>
@@ -15,12 +15,12 @@ class HomeCarrousel extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Carousel.Caption>
+                    <Carousel.Caption style={{color: 'var(--bs-green)'}}>
                     <h3 style={style.subtext}>Extratos</h3>
                     <p style={style.bottomText}>O banco de extratos do Cerrado possui mais de 1000 extratos.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item>
+                <Carousel.Item style={{color: 'var(--bs-red)'}}>
                     <div className="d-block w-100" style={{ height: '66vh' }}>
                         <Row className="h-100">
                             <Col md={12} style={{marginTop: '125px'}}>
@@ -28,12 +28,12 @@ class HomeCarrousel extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Carousel.Caption>
+                    <Carousel.Caption style={{color: 'var(--bs-red)'}}>
                     <h3 style={style.subtext}>Famílias</h3>
                     <p style={style.bottomText}>Os extratos foram obtidos de plantas de 46 famílias diferentes.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item>
+                <Carousel.Item style={{color: 'var(--bs-cyan)'}}>
                     <div className="d-block w-100" style={{ height: '66vh' }}>
                         <Row className="h-100">
                             <Col md={12} style={{marginTop: '125px'}}>
@@ -41,12 +41,12 @@ class HomeCarrousel extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Carousel.Caption>
+                    <Carousel.Caption style={{color: 'var(--bs-cyan)'}}>
                     <h3 style={style.subtext}>Espécies</h3>
                     <p style={style.bottomText}>O banco de extratos contempla 107 espécies nativas do Cerrado.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item>
+                <Carousel.Item style={{color: 'var(--bs-yellow)'}}>
                     <div className="d-block w-100" style={{ height: '66vh' }}>
                         <Row className="h-100">
                             <Col md={12} style={{marginTop: '125px'}}>
@@ -54,12 +54,12 @@ class HomeCarrousel extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Carousel.Caption>
+                    <Carousel.Caption style={{color: 'var(--bs-yellow)'}}>
                     <h3 style={style.subtext}>Extratos Testados</h3>
                     <p style={style.bottomText}>O banco de extratos contempla 851 extratos testados.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item>
+                <Carousel.Item style={{color: 'var(--bs-primary)'}}>
                     <div className="d-block w-100" style={{ height: '66vh' }}>
                         <Row className="h-100">
                             <Col md={12} style={{marginTop: '125px'}}>
@@ -67,7 +67,7 @@ class HomeCarrousel extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Carousel.Caption>
+                    <Carousel.Caption style={{color: 'var(--bs-primary)'}}>
                     <h3 style={style.subtext}>Extratos Larvicidas</h3>
                     <p style={style.bottomText}>O banco de extratos contempla 195 extratos larvicidas.</p>
                     </Carousel.Caption>

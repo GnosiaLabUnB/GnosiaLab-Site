@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container'
 
 async function get_extract(extract_id) {
-
   return fetch('http://localhost:8000/api/extract/' + extract_id, {
     method: 'GET',
     headers: {
