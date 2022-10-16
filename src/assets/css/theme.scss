@@ -513,15 +513,15 @@ $breadcrumb-divider: '/';
 
 
 // Carousel
-$carousel-control-color: $white;
+$carousel-control-color: map-get($theme-colors,"primary");
 $carousel-control-width: 15%;
 $carousel-control-opacity: 0.5;
 $carousel-indicator-width: 30px;
 $carousel-indicator-height: 3px;
 $carousel-indicator-spacer: 3px;
-$carousel-indicator-active-bg: $white;
+$carousel-indicator-active-bg: map-get($theme-colors,"primary");
 $carousel-caption-width: 70%;
-$carousel-caption-color: $white;
+$carousel-caption-color: map-get($theme-colors,"primary");
 $carousel-control-icon-width: 20px;
 $carousel-transition: transform 0.6s ease;
 
