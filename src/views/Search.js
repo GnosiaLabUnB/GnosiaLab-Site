@@ -7,50 +7,24 @@ import Container from "react-bootstrap/Container";
 import NavBar from "../components/NavBar";
 import SearchForm from '../components/SearchForm';
 import Footer from "../components/Footer";
+import CompostCard from "../components/CompostCard";
 
 
 class Search extends React.Component {
 
     constructor(props){
       super(props);
-      // this.state = {
-      //   search: "",
-      //   result: {
-      //     code: "",
-      //     origin: "",
-      //     family: "",
-      //     species: "",
-      //     organ: "",
-      //     taxonomic_system: "",
-      //     soil: "",
-      //     vegetation_notes: "",
-      //     collection_date: "",
-      //     solvent: "",
-      //     extraction_yield: "",
-      //     extraction_method: "",
-      //     availability: "",
-      //     address_id: "",
-      //     vegetation_id: "",
-      //     address: {
-      //       city: "",
-      //       state: "",
-      //       location: "",
-      //       lat: "",
-      //       long: ""
-      //     },
-      //     vegetation: {
-      //       general: "",
-      //       local: "",
-      //       english: ""
-      //     }
-      //   }
-      // };
-      this.handleSearchChange = this.handleSearchChange.bind(this);
-      // this.handleSubmit = this.handleSubmit.bind(this);
+      this.state = {
+        search: "",
+        result: ""
+      };
     }
 
-    handleSearchChange(event) {
-      this.setState({search: event.target.value})
+    handleCallback = (search_result) =>{
+      this.setState({result: search_result});
+      // this.setState({search: event.target.value});
+      console.log(search_result);
+      console.log(this.state.result);
     }
 
     render() {
@@ -62,16 +36,17 @@ class Search extends React.Component {
                 <Col lg={3} className="text-left">
                   <Row>
                     <Col lg={11}>
-                      <SearchForm></SearchForm>
+                      <SearchForm searchViewCallback={this.handleCallback}></SearchForm>
                     </Col>
                     <Col lg={1} style={{ height: '35rem', margin: '0', padding: '0', width: '2px', borderRight: '2px solid var(--bs-secondary)'}}/>
                   </Row>
                 </Col>
-
-                {/* <Col style={{ height: '5rem', borderRight: '3px solid var(--bs-secondary)'}}/> */}
-                <Col lg={9} className="my-auto">
+                <Col lg={9}>
                   <Container>
                     <Row>
+                      <Col lg={12}>
+                        <CompostCard result={this.state.result}> </CompostCard>
+                      </Col>
                     </Row>
                   </Container>
                 </Col>

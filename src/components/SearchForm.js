@@ -12,7 +12,6 @@ async function get_extract(extract_id) {
       }
     })
     .then((response) => {
-      // console.log(response.clone().json())
       return response.json()
     })
     .catch((error) => {
@@ -25,45 +24,21 @@ class SearchForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          search: "",
-          result: {
-            code: "",
-            origin: "",
-            family: "",
-            species: "",
-            organ: "",
-            taxonomic_system: "",
-            soil: "",
-            vegetation_notes: "",
-            collection_date: "",
-            solvent: "",
-            extraction_yield: "",
-            extraction_method: "",
-            availability: "",
-            address_id: "",
-            vegetation_id: "",
-            address: {
-              city: "",
-              state: "",
-              location: "",
-              lat: "",
-              long: ""
-            },
-            vegetation: {
-              general: "",
-              local: "",
-              english: ""
-            }
-          }
+          search: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
       }
 
     async handleSubmit(event) {
         event.preventDefault();
         console.log("Searching for: " + this.state.search);
         let result_json = await get_extract(this.state.search);
-        this.setState({result: result_json});
+        this.props.searchViewCallback(result_json);
+    }
+
+    handleSearchChange(event) {
+        this.setState({search: event.target.value})
     }
 
     render() {

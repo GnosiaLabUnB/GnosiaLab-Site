@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container'
 
 async function get_extract(extract_id) {
   return fetch('http://localhost:8000/api/extract/' + extract_id, {
@@ -13,7 +12,6 @@ async function get_extract(extract_id) {
     }
   })
   .then((response) => {
-    // console.log(response.clone().json())
     return response.json()
   })
   .catch((error) => {
