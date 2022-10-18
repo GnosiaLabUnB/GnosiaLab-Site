@@ -1,6 +1,7 @@
 import Home from './views/Home';
 import About from './views/About';
 import Search from './views/Search';
+import Publications from './views/Publications';
 
 const routes = [
     {
@@ -11,6 +12,10 @@ const routes = [
     {
       path: "/search",
       main: () => <Search/>
+    },
+    {
+      path: "/publications",
+      main: () => <Publications/>
     },
     {
       path: "/about",
