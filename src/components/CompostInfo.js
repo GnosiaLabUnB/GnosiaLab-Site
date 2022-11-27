@@ -9,10 +9,6 @@ import Col from 'react-bootstrap/Col';
 
 class CompostInfo extends React.Component {
 
-    constructor(props){
-        super(props)
-    }
-
     render() {
         return (
             <Modal

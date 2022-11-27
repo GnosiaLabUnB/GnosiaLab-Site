@@ -2,7 +2,7 @@ import React from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
-class ContentContainer extends React.Component {
+class ContentWrapper extends React.Component {
     render() {
         return (
             <Container style={{backgroundColor: this.props.color}}>
@@ -15,4 +15,4 @@ class ContentContainer extends React.Component {
     }
 }
 
-export default ContentContainer
+export default ContentWrapper

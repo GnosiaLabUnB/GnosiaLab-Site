@@ -86,7 +86,7 @@ const style = {
         fontWeight: 'bold'
     },
     subtext: {
-        marginBottom: '120px',
+        marginBottom: '60px',
         fontSize: '50px'
     },
     bottomText: {

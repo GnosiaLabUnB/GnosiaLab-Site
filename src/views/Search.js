@@ -4,10 +4,9 @@ import React from 'react';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import NavBar from "../components/NavBar";
-import SearchForm from '../components/SearchForm';
-import Footer from "../components/Footer";
+import SearchForm from '../components/search/SearchForm';
 import CompostCard from "../components/CompostCard";
+import PageWrapper from '../components/shared/PageWrapper';
 
 
 class Search extends React.Component {
@@ -29,8 +28,7 @@ class Search extends React.Component {
 
     render() {
       return (
-        <div>
-            <NavBar></NavBar>
+        <PageWrapper>
             <Container fluid style={{height: '85vh', padding: '60px'}}>
               <Row className='h-85'>
                 <Col lg={3} className="text-left">
@@ -52,8 +50,7 @@ class Search extends React.Component {
                 </Col>
               </Row>
             </Container>
-            <Footer></Footer>
-        </div>
+        </PageWrapper>
       )
     }
 }
