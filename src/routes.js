@@ -10,10 +10,14 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+
 import BackupView from './views/admin/BackupView';
 import EditView from './views/admin/EditView';
 import TeamView from './views/admin/TeamView';
 import DashView from './views/admin/DashView';
+import AddFungo from './views/admin/AddFungo';
+import AddExtrato from './views/admin/AddExtrato';
+import AddMicoteca from './views/admin/AddMicoteca';
 
 
 export function NavRouter() {
@@ -27,7 +31,12 @@ export function NavRouter() {
         <Route path="/about" element={<About/>}/>
         <Route path="/admin" element={<AdminDash/>}>
           <Route index element={<DashView/>}/>
-          <Route path="add" element={<AddView/>}/>
+          <Route path="add">
+            <Route index element={<AddView/>}/>
+            <Route path="micoteca" element={<AddMicoteca/>}/>
+            <Route path="fungo" element={<AddFungo/>}/>
+            <Route path="extrato" element={<AddExtrato/>}/>
+          </Route>
           <Route path="backups" element={<BackupView/>}/>
           <Route path="edit" element={<EditView/>}/>
           <Route path="team" element={<TeamView/>}/>
@@ -41,7 +50,12 @@ export function AdminRouter() {
   return(
     <Routes>
         <Route index element={<DashView/>}/>
-        <Route path="add" element={<AddView/>}/>
+        <Route path="add">
+          <Route index element={<AddView/>}/>
+          <Route path="micoteca" element={<AddMicoteca/>}/>
+          <Route path="fungo" element={<AddFungo/>}/>
+          <Route path="extrato" element={<AddExtrato/>}/>
+        </Route>
         <Route path="backups" element={<BackupView/>}/>
         <Route path="edit" element={<EditView/>}/>
         <Route path="team" element={<TeamView/>}/>

@@ -11,13 +11,13 @@ class AddView extends React.Component {
             <Container fluid className="h-100 p-3">
                 <Row className="h-100">
                     <Col xl={4} className="my-auto">
-                        <AddCard variant="Micoteca"/>
+                        <AddCard variant="Micoteca" to="/admin/add/micoteca"/>
                     </Col>
                     <Col xl={4} className="my-auto">
-                        <AddCard variant="Extratos"/>
+                        <AddCard variant="Extratos" to="/admin/add/extrato"/>
                     </Col>
                     <Col xl={4} className="my-auto">
-                        <AddCard variant="Fungos"/>
+                        <AddCard variant="Fungos" to="/admin/add/fungo"/>
                     </Col>
                 </Row>
             </Container>

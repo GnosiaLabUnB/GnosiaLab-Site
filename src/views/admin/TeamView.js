@@ -1,10 +1,12 @@
 import React from 'react';
-
+import Row from 'react-bootstrap/Row';
 
 class TeamView extends React.Component {
     render() {
       return (
-            <h1>Team view</h1>
+        <Row>
+            <h1 style={{color: 'var(--bs-gray-800)'}}>Gerenciar Time</h1>
+        </Row>
       )
     }
 }

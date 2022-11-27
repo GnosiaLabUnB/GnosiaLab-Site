@@ -1,11 +1,14 @@
-
 import React from 'react';
+
+import Row from 'react-bootstrap/Row'
 
 
 class DashView extends React.Component {
     render() {
       return (
-            <h1>Dash view</h1>
+        <Row>
+            <h1 style={{color: 'var(--bs-gray-800)'}}>Dashboard</h1>
+        </Row>
       )
     }
 }

@@ -8,7 +8,7 @@ class AdminWrapper extends React.Component {
       return (
         <div className="main-wrapper">
             <LeftNavbar/>
-            <Container fluid className="main-container">
+            <Container fluid className="main-container p-5">
                 {this.props.children}
             </Container>
         </div>
