@@ -1,0 +1,14 @@
+.form_row_heading {
+    background-color: var(--bs-primary);
+    width: 100%;
+    margin: 0;
+    height: 35px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.form_label_style {
+    color: var(--bs-white);
+    font-weight: bold;
+    border: 10px;
+}

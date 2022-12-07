@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row'
+import FormLabel from '../shared/FormLabel';
 import Button from 'react-bootstrap/Button';
 
 
@@ -45,10 +45,8 @@ class SearchForm extends React.Component {
         return (
             <Form onSubmit={this.handleSubmit} style={{width: "100%", height: '100%'}}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Row style={style.rowStyle}>
-                    <Form.Label className="my-auto" style={style.labelStyle}>Search ID</Form.Label>
-                </Row>
-                <Form.Control value={this.state.search} placeholder="Enter extract search ID" onChange={this.handleSearchChange}/>
+                  <FormLabel label="Search ID"/>
+                  <Form.Control value={this.state.search} placeholder="Enter extract search ID" onChange={this.handleSearchChange}/>
                 </Form.Group>
                 <Button variant="primary" type="submit">
                 Submit
@@ -58,20 +56,5 @@ class SearchForm extends React.Component {
     }
 }
 
-const style = {
-    labelStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        border: '10px'
-    },
-    rowStyle: {
-        backgroundColor: 'var(--bs-primary)',
-        width: '100%',
-        margin: '0',
-        height: '35px',
-        marginBottom: '5px',
-        borderRadius: '5px'
-    }
-}
 
 export default SearchForm
