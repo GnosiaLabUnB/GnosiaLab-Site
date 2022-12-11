@@ -15,10 +15,10 @@ function getProperIcon(variant) {
 
     if (variant === "Micoteca") {
         return (<GiMushroom size={icon_size} className={icon_class}/>);
-    } else if (variant === "Extratos") {
-        return (<ImLab size={icon_size} className={icon_class}/>)
-    } else {
+    } else if (variant === "Extrato de Plantas") {
         return (<RiPlantFill size={icon_size} className={icon_class}/>)
+    } else {
+        return (<ImLab size={icon_size} className={icon_class}/>)
     }
 }
 

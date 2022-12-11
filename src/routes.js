@@ -5,6 +5,7 @@ import Publications from './views/Publications';
 import AdminDash from './views/AdminDash';
 
 import AddView from './views/admin/AddView';
+import AdminSearchView from './views/admin/SearchView'
 
 import {
   Routes,
@@ -31,6 +32,7 @@ export function NavRouter() {
         <Route path="/about" element={<About/>}/>
         <Route path="/admin" element={<AdminDash/>}>
           <Route index element={<DashView/>}/>
+          <Route path="search" element={<AdminSearchView/>}/>
           <Route path="add">
             <Route index element={<AddView/>}/>
             <Route path="micoteca" element={<AddMicoteca/>}/>
@@ -50,6 +52,7 @@ export function AdminRouter() {
   return(
     <Routes>
         <Route index element={<DashView/>}/>
+        <Route path="search" element={<AdminSearchView/>}/>
         <Route path="add">
           <Route index element={<AddView/>}/>
           <Route path="micoteca" element={<AddMicoteca/>}/>

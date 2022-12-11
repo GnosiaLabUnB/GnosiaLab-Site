@@ -1,6 +1,6 @@
 import React from 'react';
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
-import {AiFillDashboard, AiFillFileAdd, AiFillEdit, AiFillSetting, AiFillDatabase, AiFillDelete, AiFillContacts} from 'react-icons/ai'
+import {AiFillDashboard, AiFillFileAdd, AiFillEdit, AiFillSetting, AiFillDatabase, AiFillDelete, AiFillContacts, AiOutlineSearch} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
 
@@ -37,6 +37,12 @@ class LeftNavbar extends React.Component {
                                     <SidebarMenu.Nav.Title className="me-3">Dashboard</SidebarMenu.Nav.Title>
                                     <SidebarMenu.Nav.Icon>
                                         <AiFillDashboard className='mb-1' size={35}/>
+                                    </SidebarMenu.Nav.Icon>
+                                </SidebarMenu.Nav.Link>
+                                <SidebarMenu.Nav.Link as={Link}  to="/admin/search" className="mb-3">
+                                    <SidebarMenu.Nav.Title className="me-3">Pesquisar</SidebarMenu.Nav.Title>
+                                    <SidebarMenu.Nav.Icon>
+                                        <AiOutlineSearch className='mb-1' size={35}/>
                                     </SidebarMenu.Nav.Icon>
                                 </SidebarMenu.Nav.Link>
                                 <SidebarMenu.Nav.Link as={Link}  to="/admin/add" className="mb-3">
