@@ -36,7 +36,7 @@ class AdminSearchView extends React.Component {
             </Row>
             <Accordion>
               <Accordion.Item eventKey="0">
-                <Accordion.Header>Informações da Planta</Accordion.Header>
+                <Accordion.Header>Informações da Planta.</Accordion.Header>
                 <Accordion.Body>
                   <Row className='mt-2'>
                     <Form.Group as={Col} controlId="" className="mb-3">
