@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import LeftNavbar from './Sidebar';
-import '../../assets/css/sidebar.css'
+import LeftNavbar from '../shared/Sidebar';
+import '../../../assets/css/sidebar.css'
 
 class AdminWrapper extends React.Component {
     render() {

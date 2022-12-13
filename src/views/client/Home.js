@@ -1,6 +1,7 @@
 import React from 'react';
-import HomeCarrousel from '../components/home/HomeCarrousel';
-import PageWrapper from '../components/shared/PageWrapper';
+
+import HomeCarrousel from '../../components/client/home/HomeCarrousel';
+import PageWrapper from '../../components/client/shared/PageWrapper';
 
 class Home extends React.Component {
     render() {

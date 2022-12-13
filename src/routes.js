@@ -1,25 +1,26 @@
-import Home from './views/Home';
-import About from './views/About';
-import Search from './views/Search';
-import Publications from './views/Publications';
-import AdminDash from './views/AdminDash';
+import Home from './views/client/Home';
+import About from './views/client/About';
+import Search from './views/client/Search';
+import Publications from './views/client/Publications';
 
-import AddView from './views/admin/AddView';
-import AdminSearchView from './views/admin/SearchView'
+
+import AddView from './views/dashboard/add/AddView';
+import AdminSearchView from './views/dashboard/SearchView';
+import BackupView from './views/dashboard/BackupView';
+import EditView from './views/dashboard/EditView';
+import TeamView from './views/dashboard/TeamView';
+import DashView from './views/dashboard/DashView';
+import AddFungo from './views/dashboard/add/AddFungo';
+import AddExtrato from './views/dashboard/add/AddExtrato';
+import AddMicoteca from './views/dashboard/add/AddMicoteca';
+import LoginView from './views/dashboard/Login';
+import AdminDash from './views/dashboard/AdminDash';
+
 
 import {
   Routes,
   Route
 } from "react-router-dom";
-
-import BackupView from './views/admin/BackupView';
-import EditView from './views/admin/EditView';
-import TeamView from './views/admin/TeamView';
-import DashView from './views/admin/DashView';
-import AddFungo from './views/admin/AddFungo';
-import AddExtrato from './views/admin/AddExtrato';
-import AddMicoteca from './views/admin/AddMicoteca';
-
 
 export function NavRouter() {
   return(
@@ -43,6 +44,7 @@ export function NavRouter() {
           <Route path="edit" element={<EditView/>}/>
           <Route path="team" element={<TeamView/>}/>
         </Route>
+        <Route path="login" element={<LoginView/>}/>
         <Route path="*" element={<Home/>}/>
     </Routes>
   )

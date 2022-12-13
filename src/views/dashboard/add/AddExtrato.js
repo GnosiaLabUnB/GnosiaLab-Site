@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 
 
 import Form from 'react-bootstrap/Form'
-import FormLabel from '../../components/shared/FormLabel';
+import FormLabel from '../../../components/shared/FormLabel';
 import CreatableSelect from 'react-select/creatable';
 
 

@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import CreatableSelect from 'react-select/creatable';
 
-import FormLabel from '../../components/shared/FormLabel';
+import FormLabel from '../../../components/shared/FormLabel';
 
 class AddFungo extends React.Component {
   render() {

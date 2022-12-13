@@ -4,9 +4,9 @@ import React from 'react';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import SearchForm from '../components/search/SearchForm';
-import CompostCard from "../components/CompostCard";
-import PageWrapper from '../components/shared/PageWrapper';
+import SearchForm from '../../components/client/search/SearchForm';
+import CompostCard from "../../components/client/CompostCard";
+import PageWrapper from '../../components/client/shared/PageWrapper';
 
 
 class Search extends React.Component {

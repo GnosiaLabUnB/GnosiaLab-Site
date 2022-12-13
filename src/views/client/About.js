@@ -1,11 +1,12 @@
 import React from 'react';
 import Col from "react-bootstrap/Col";
-
-import Image from 'react-bootstrap/Image'
-import ContentWrapper from '../components/shared/ContentWrapper';
 import Row from 'react-bootstrap/Row';
-import MemberCard from '../components/about/MemberCard'
-import PageWrapper from '../components/shared/PageWrapper';
+import Image from 'react-bootstrap/Image'
+
+
+import MemberCard from '../../components/client/about/MemberCard'
+import ContentWrapper from '../../components/client/shared/ContentWrapper';
+import PageWrapper from '../../components/client/shared/PageWrapper';
 
 class About extends React.Component {
     render() {
@@ -18,7 +19,7 @@ class About extends React.Component {
                     </p>
                 </Col>
                 <Col lg={4}>
-                    <Image src={require("../assets/images/placeholder.png")} style={{height: '300px'}} fluid/>
+                    <Image src={require("../../assets/images/placeholder.png")} style={{height: '300px'}} fluid/>
                 </Col>
            </ContentWrapper>
             <ContentWrapper color='var(--bs-blue)'>

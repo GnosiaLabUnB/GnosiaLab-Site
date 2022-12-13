@@ -29,3 +29,8 @@
     height: 100vh;
     overflow: auto;
   }
+
+
+  .sidebar-menu-collapse:not(.show) .sidebar-user-card {
+    display: none;
+  }

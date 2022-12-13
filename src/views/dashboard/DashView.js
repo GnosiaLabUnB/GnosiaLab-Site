@@ -3,16 +3,14 @@ import React from 'react';
 import Row from 'react-bootstrap/Row'
 import Col  from 'react-bootstrap/Col';
 import Card  from 'react-bootstrap/Card';
-import Button  from 'react-bootstrap/Button';
+import HeaderTitle from '../../components/dashboard/shared/HeaderTitle';
 
 
 class DashView extends React.Component {
     render() {
       return (
         <>
-        <Row>
-            <h1 style={{color: 'var(--bs-gray-800)'}}>Dashboard</h1>
-        </Row>
+        <HeaderTitle title="Dashboard"/>
         <Row className="mt-5" style={{height: '35vh'}}>
           <Col xl={6}>
             <Card className="me-5 w-100 h-100">

@@ -1,6 +1,5 @@
 import React from 'react';
-import PageWrapper from '../components/shared/PageWrapper';
-
+import PageWrapper from '../../components/client/shared/PageWrapper';
 
 
 class Publications extends React.Component {

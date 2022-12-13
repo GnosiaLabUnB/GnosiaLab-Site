@@ -1,6 +1,7 @@
 import React from 'react';
-import AdminWrapper from '../components/dashboard/AdminWrapper';
-import { AdminRouter } from '../routes';
+import AdminWrapper from '../../components/dashboard/shared/AdminWrapper';
+
+import { AdminRouter } from '../../routes';
 
 class AdminDash extends React.Component {
     render() {

@@ -1,13 +1,12 @@
 
 import React from 'react';
-import Row from 'react-bootstrap/Row';
+
+import HeaderTitle from '../../components/dashboard/shared/HeaderTitle';
 
 class EditView extends React.Component {
     render() {
       return (
-        <Row>
-            <h1 style={{color: 'var(--bs-gray-800)'}}>Editar</h1>
-        </Row>
+        <HeaderTitle title="Editar"/>
       )
     }
 }
