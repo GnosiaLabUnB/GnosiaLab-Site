@@ -6,7 +6,133 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FormLabel from '../../../components/shared/FormLabel';
 import CreatableSelect from 'react-select/creatable';
+
+
+import * as mi_services from '../../../services/myco_info'
+import * as shared_services from '../../../services/shared_info'
+import * as shared from '../../../services/shared.js'
+import * as taxonomy_services from '../../../services/taxonomy.js'
+
 class AddMicoteca extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      treatments_opt: [],
+      name_lab_opt: [],
+      organisms_opt: [],
+      nomeclature_opt: [],
+      organisms_types_opt: [],
+      plant_family_opt: [],
+      plant_organ_opt: [],
+      plant_species_opt: [],
+      fungus_class_opt: [],
+      fungus_family_opt: [],
+      fungus_species_opt: [],
+      fungus_genus_opt: [],
+      fungus_order_opt: [],
+      taxonomy_lvl_opt: [],
+      geolocation_opt: [],
+      organisms_json: {},
+      plant_family_json: {},
+      nomeclature_json: {},
+      fungus_class_json: {},
+      fungus_family_json: {},
+      fungus_genus_json: {},
+      fungus_order_json: {},
+      synonym_value: ''
+    }
+  }
+
+  async componentDidMount() {
+    let treatments_json = await mi_services.get_all_treatments()
+    let name_lab_json = await mi_services.get_all_name_lab()
+    let organisms_json = await mi_services.get_all_organisms()
+    let nomeclature_json = await mi_services.get_all_nomeclature()
+    let geolocation_json = await mi_services.get_all_geolocation()
+    let plant_family_json = await shared_services.get_all_plant_family()
+    let plant_organ_json = await shared_services.get_all_plant_organ()
+    let fungus_class_json = await taxonomy_services.get_all_fungus_class()
+    let taxonomy_lvl_json = await taxonomy_services.get_all_taxonomy_lvls()
+    
+
+    let fungus_class_opt = fungus_class_json.map(shared.opt_creator)
+    let taxonomy_lvl_opt = taxonomy_lvl_json.map(shared.opt_creator)
+    let treatments_opt = treatments_json.map(shared.opt_creator)
+    let name_lab_opt = name_lab_json.map(shared.opt_creator)
+    let organisms_opt = organisms_json.map(shared.opt_creator)
+    let nomeclature_opt = nomeclature_json.map(shared.opt_creator_nomeclature)
+    let plant_family_opt = plant_family_json.map(shared.opt_creator)
+    let plant_organ_opt = plant_organ_json.map(shared.opt_creator_organ)
+
+    let geolocation_opt = geolocation_json.map(shared.opt_creator_geo)
+
+    
+    this.setState({
+      organisms_json: organisms_json,
+      nomeclature_json: nomeclature_json,
+      plant_family_json: plant_family_json,
+      fungus_class_json: fungus_class_json,
+      treatments_opt: treatments_opt,
+      name_lab_opt: name_lab_opt,
+      organisms_opt: organisms_opt,
+      nomeclature_opt: nomeclature_opt,
+      plant_family_opt: plant_family_opt,
+      plant_organ_opt: plant_organ_opt,
+      taxonomy_lvl_opt: taxonomy_lvl_opt,
+      fungus_class_opt: fungus_class_opt,
+      geolocation_opt: geolocation_opt
+    })
+  }
+
+  handleChange(e, key) {
+    if (e != null) {
+      if (key === "types") {
+        let search_json = this.state.organisms_json
+        let new_opt = shared.search_dict(e, search_json)[key].map(shared.opt_creator)
+        this.setState({organisms_types_opt: new_opt});
+
+      } else if (key === "species") {
+        let search_json = this.state.plant_family_json
+        let new_opt = shared.search_dict(e, search_json)[key].map(shared.opt_creator)
+        this.setState({plant_species_opt: new_opt});
+
+      } else if (key === "family") {
+        let search_json = this.state.fungus_order_json
+        let new_json = shared.search_dict(e, search_json)[key]
+        let new_opt = new_json.map(shared.opt_creator)
+        this.setState({fungus_family_opt: new_opt, fungus_family_json: new_json});
+
+      } else if (key === "order") {
+        let search_json = this.state.fungus_class_json
+        let new_json = shared.search_dict(e, search_json)[key]
+        let new_opt = new_json.map(shared.opt_creator)
+        this.setState({fungus_order_opt: new_opt, fungus_order_json: new_json});
+        
+      } else if (key === "genus") {
+        let search_json = this.state.fungus_family_json
+        let new_json = shared.search_dict(e, search_json)[key]
+        let new_opt = new_json.map(shared.opt_creator)
+        this.setState({fungus_genus_opt: new_opt, fungus_genus_json: new_json});
+        
+      } else if (key === "fungus_species") {
+        let search_json = this.state.fungus_genus_json
+        let new_json = shared.search_dict(e, search_json)["species"]
+        let new_opt = new_json.map(shared.opt_creator)
+        this.setState({fungus_species_opt: new_opt});
+      }
+
+      
+    } 
+  };
+
+  setSynonymValue(e) {
+    if (e != null) {
+      this.setState({synonym_value: shared.search_dict(e, this.state.nomeclature_json)["synonym"]});
+    } 
+  };
+
+
     render() {
       return (
         <>
@@ -40,18 +166,19 @@ class AddMicoteca extends React.Component {
               <Row>
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Organism"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable 
+                                       options={this.state.organisms_opt}
+                                       onChange={(e) => this.handleChange(e, "types")}/>
                   </Form.Group>
-                  
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Organism Type"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable options={this.state.organisms_types_opt}/>
                   </Form.Group>
               </Row>
               <Row>
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Tratamento"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable options={this.state.treatments_opt}/>
                   </Form.Group>
                   
                   <Form.Group as={Col} controlId="" className="mb-3">
@@ -65,15 +192,17 @@ class AddMicoteca extends React.Component {
               <Row className='mt-2'>
                 <Form.Group as={Col} controlId="" className="mb-3">
                   <FormLabel label="Nome Lab"/>
-                  <CreatableSelect isClearable/>
+                  <CreatableSelect isClearable options={this.state.name_lab_opt}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="" className="mb-3">
                   <FormLabel label="Scientific name"/>
-                  <CreatableSelect isClearable/>
+                  <CreatableSelect isClearable 
+                                   options={this.state.nomeclature_opt}
+                                   onChange={(e) => this.setSynonymValue(e)}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="" className="mb-3">
                   <FormLabel label="Synonym"/>
-                  <CreatableSelect isClearable/>
+                  <Form.Control type="text" placeholder="Select scientific name" disabled value={this.state.synonym_value}/>
                 </Form.Group>
               </Row>
               <Row className='mt-3'>
@@ -82,52 +211,61 @@ class AddMicoteca extends React.Component {
               <Row className='mt-2'>
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Taxonomic Level"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable options={this.state.taxonomy_lvl_opt}/>
                   </Form.Group>
               </Row>
               <Row>
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Class"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable
+                                       options={this.state.fungus_class_opt}
+                                       onChange={(e) => this.handleChange(e, "order")}/>
                   </Form.Group>
                   
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Order"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable 
+                                       options={this.state.fungus_order_opt}
+                                       onChange={(e) => this.handleChange(e, "family")}/>
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Family"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable
+                                       options={this.state.fungus_family_opt}
+                                       onChange={(e) => this.handleChange(e, "genus")}/>
                   </Form.Group>
               </Row>
               <Row>
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Genus"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable
+                                       options={this.state.fungus_genus_opt}
+                                       onChange={(e) => this.handleChange(e, "fungus_species")}/>
                   </Form.Group>
                   
                   <Form.Group as={Col} controlId="" className="mb-3">
                       <FormLabel label="Species"/>
-                      <CreatableSelect isClearable/>
+                      <CreatableSelect isClearable options={this.state.fungus_species_opt}/>
                   </Form.Group>
               </Row>
-
               <Row className='mt-3'>
                   <h5>Informações da Planta</h5>
               </Row>
               <Row className='mt-2'>
                 <Form.Group as={Col} controlId="" className="mb-3">
                   <FormLabel label="Organ"/>
-                  <CreatableSelect isClearable/>
-                </Form.Group>
-                <Form.Group as={Col} controlId="" className="mb-3">
-                  <FormLabel label="Species"/>
-                  <CreatableSelect isClearable/>
+                  <CreatableSelect isClearable options={this.state.plant_organ_opt}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="" className="mb-3">
                   <FormLabel label="Family"/>
-                  <CreatableSelect isClearable/>
+                  <CreatableSelect isClearable
+                                   options={this.state.plant_family_opt}
+                                   onChange={(e) => this.handleChange(e, "species")}/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="" className="mb-3">
+                  <FormLabel label="Species"/>
+                  <CreatableSelect isClearable options={this.state.plant_species_opt}/>
                 </Form.Group>
               </Row>
               <Row>
@@ -136,12 +274,8 @@ class AddMicoteca extends React.Component {
                   <Form.Control type="date" placeholder="Enter date"/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="" className="mb-3">
-                  <FormLabel label="Latitude"/>
-                  <CreatableSelect isClearable/>
-                </Form.Group>
-                <Form.Group as={Col} controlId="" className="mb-3">
-                  <FormLabel label="Longitude"/>
-                  <CreatableSelect isClearable/>
+                  <FormLabel label="Latitude/Longitude"/>
+                  <CreatableSelect isClearable options={this.state.geolocation_opt}/>
                 </Form.Group>
               </Row>
               <Row className='mt-3'>

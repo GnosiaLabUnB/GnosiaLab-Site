@@ -7,7 +7,54 @@ import CreatableSelect from 'react-select/creatable';
 
 import FormLabel from '../../../components/shared/FormLabel';
 
+import * as fi_services from '../../../services/fungus_info.js'
+import * as shared_services from '../../../services/shared_info'
+import * as shared from '../../../services/shared.js'
+
 class AddFungo extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      growth_condition_opt: [],
+      growth_medium_opt: [],
+      locations_opt: [],
+      origin_matrix_opt: [],
+      solvent_opt: [],
+      plant_organ_opt: [],
+      availability_opt: [
+        {id: 0, label: "Unavailable"},
+        {id: 1, label: "Available"}
+      ]
+    }
+  }
+
+  async componentDidMount() {
+    let growth_condition_json = await fi_services.get_all_growth_condition()
+    let growth_medium_json = await fi_services.get_all_growth_medium()
+    let locations_json = await fi_services.get_all_locations()
+    let origin_matrix_json = await fi_services.get_all_origin_matrix()
+    let solvent_json = await shared_services.get_all_solvents()
+    let plant_organ_json = await shared_services.get_all_plant_organ()
+    
+    let solvent_opt = solvent_json.map(shared.opt_creator)
+    let plant_organ_opt = plant_organ_json.map(shared.opt_creator_organ)
+    let growth_condition_opt = growth_condition_json.map(shared.opt_creator)
+    let growth_medium_opt = growth_medium_json.map(shared.opt_creator)
+    let locations_opt = locations_json.map(shared.opt_creator)
+    let origin_matrix_opt = origin_matrix_json.map(shared.opt_creator)
+    
+    console.log(plant_organ_opt)
+    this.setState({
+      growth_condition_opt: growth_condition_opt,
+      growth_medium_opt: growth_medium_opt,
+      locations_opt: locations_opt,
+      origin_matrix_opt: origin_matrix_opt,
+      solvent_opt: solvent_opt,
+      plant_organ_opt: plant_organ_opt
+    })
+  }
+
   render() {
     return (
       <>
@@ -35,45 +82,45 @@ class AddFungo extends React.Component {
           <Row>
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Growth Medium" />
-              <Form.Control type="text" placeholder="Enter ID" />
+              <CreatableSelect isClearable options={this.state.growth_medium_opt}/>
             </Form.Group>
 
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Growth Condition" />
-              <Form.Control type="text" placeholder="Enter Code" />
+              <CreatableSelect isClearable options={this.state.growth_condition_opt}/>
             </Form.Group>
 
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Origin Matrix" />
-              <CreatableSelect isClearable />
+              <CreatableSelect isClearable options={this.state.origin_matrix_opt}/>
             </Form.Group>
           </Row>
           <Row>
 
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Plant Organ" />
-              <CreatableSelect isClearable />
+              <CreatableSelect isClearable options={this.state.solvent_opt}/>
             </Form.Group>
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Solvent" />
-              <CreatableSelect isClearable />
+              <CreatableSelect isClearable options={this.state.solvent_opt}/>
             </Form.Group>
 
           </Row>
           <Row>
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Extraction Year" />
-              <Form.Control type="number" placeholder="Enter Code" />
+              <Form.Control type="number" placeholder="Enter year" />
             </Form.Group>
 
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Mass (mg)" />
-              <Form.Control type="number" placeholder="Enter Code" />
+              <Form.Control type="number" placeholder="Enter ammount" />
             </Form.Group>
 
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Availability" />
-              <CreatableSelect isClearable />
+              <CreatableSelect isClearable options={this.state.availability_opt}/>
             </Form.Group>
           </Row>
           <Row className='mt-3'>
@@ -82,7 +129,7 @@ class AddFungo extends React.Component {
           <Row>
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Location" />
-              <Form.Control type="text" placeholder="Enter Code" />
+              <CreatableSelect isClearable options={this.state.locations_opt}/>
             </Form.Group>
 
             <Form.Group as={Col} controlId="" className="mb-3">
@@ -91,13 +138,13 @@ class AddFungo extends React.Component {
             </Form.Group>
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Endophytic Fungi Code" />
-              <Form.Control type="text" placeholder="Enter ID" />
+              <Form.Control type="text" placeholder="Enter Code" />
             </Form.Group>
           </Row>
           <Row>
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Comments" />
-              <Form.Control type="textarea" placeholder="Enter Code" />
+              <Form.Control type="textarea" rows={2}/>
             </Form.Group>
           </Row>
         </Form>
