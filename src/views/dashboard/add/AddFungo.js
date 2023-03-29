@@ -44,7 +44,6 @@ class AddFungo extends React.Component {
     let locations_opt = locations_json.map(shared.opt_creator)
     let origin_matrix_opt = origin_matrix_json.map(shared.opt_creator)
     
-    console.log(plant_organ_opt)
     this.setState({
       growth_condition_opt: growth_condition_opt,
       growth_medium_opt: growth_medium_opt,
@@ -99,7 +98,7 @@ class AddFungo extends React.Component {
 
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Plant Organ" />
-              <CreatableSelect isClearable options={this.state.solvent_opt}/>
+              <CreatableSelect isClearable options={this.state.plant_organ_opt}/>
             </Form.Group>
             <Form.Group as={Col} controlId="" className="mb-3">
               <FormLabel label="Solvent" />

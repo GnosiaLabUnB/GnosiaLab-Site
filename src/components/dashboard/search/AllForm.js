@@ -5,11 +5,35 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion';
 
-import CreatableSelect from 'react-select/creatable'
+import Select from 'react-select';
 import FormLabel from '../../shared/FormLabel';
+
+import * as shared from '../../../services/shared.js';
 
 
 class AllForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.species_select_ref = React.createRef();
+        this.state = {
+            plant_species_opt: []
+        }
+    }
+
+    handleChange(e, key) {
+        if (e != null) {
+            if (key === "plant_species") {
+                console.log(this.species_select_ref.current)
+                this.species_select_ref.current.clearValue();
+                let search_json = this.props.plant_family_json
+                let new_json = shared.search_dict(e, search_json)["species"]
+                let new_opt = new_json.map(shared.opt_creator)
+                this.setState({plant_species_opt: new_opt});
+            }  
+        } 
+      };
+
     render() {
         return (
             <>
@@ -17,11 +41,11 @@ class AllForm extends React.Component {
                     <Row>
                         <Form.Group as={Col} controlId="" className="mb-3">
                             <FormLabel label="ID" />
-                            <CreatableSelect isClearable />
+                            <Form.Control type="text" placeholder="Enter ID" />
                         </Form.Group>
                         <Form.Group as={Col} controlId="" className="mb-3">
                             <FormLabel label="Solvent" />
-                            <CreatableSelect isClearable />
+                            <Select isClearable options={this.props.solvent}/>
                         </Form.Group>
                     </Row>
                     <Accordion>
@@ -31,15 +55,21 @@ class AllForm extends React.Component {
                                 <Row className='mt-2'>
                                     <Form.Group as={Col} controlId="" className="mb-3">
                                         <FormLabel label="Organ" />
-                                        <CreatableSelect isClearable />
-                                    </Form.Group>
-                                    <Form.Group as={Col} controlId="" className="mb-3">
-                                        <FormLabel label="Species" />
-                                        <CreatableSelect isClearable />
+                                        <Select isClearable options={this.props.plant_organ}/>
                                     </Form.Group>
                                     <Form.Group as={Col} controlId="" className="mb-3">
                                         <FormLabel label="Family" />
-                                        <CreatableSelect isClearable />
+                                        <Select isClearable
+                                            options={this.props.plant_family}
+                                            onChange={(e) => this.handleChange(e, "plant_species")}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group as={Col} controlId="" className="mb-3">
+                                        <FormLabel label="Species" />
+                                        <Select isClearable
+                                            ref={this.species_select_ref}
+                                            isDisabled={!this.state.plant_species_opt.length}
+                                            options={this.state.plant_species_opt}/>
                                     </Form.Group>
                                 </Row>
                             </Accordion.Body>
@@ -47,7 +77,7 @@ class AllForm extends React.Component {
                     </Accordion>
                 </Form>
                 <Button className='float-end mt-4' variant="primary" type="submit">
-                    Submit
+                    Search
                 </Button>
             </>
         )

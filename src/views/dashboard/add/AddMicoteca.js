@@ -46,26 +46,31 @@ class AddMicoteca extends React.Component {
 
   async componentDidMount() {
     let treatments_json = await mi_services.get_all_treatments()
-    let name_lab_json = await mi_services.get_all_name_lab()
-    let organisms_json = await mi_services.get_all_organisms()
-    let nomeclature_json = await mi_services.get_all_nomeclature()
-    let geolocation_json = await mi_services.get_all_geolocation()
-    let plant_family_json = await shared_services.get_all_plant_family()
-    let plant_organ_json = await shared_services.get_all_plant_organ()
-    let fungus_class_json = await taxonomy_services.get_all_fungus_class()
-    let taxonomy_lvl_json = await taxonomy_services.get_all_taxonomy_lvls()
-    
-
-    let fungus_class_opt = fungus_class_json.map(shared.opt_creator)
-    let taxonomy_lvl_opt = taxonomy_lvl_json.map(shared.opt_creator)
     let treatments_opt = treatments_json.map(shared.opt_creator)
-    let name_lab_opt = name_lab_json.map(shared.opt_creator)
-    let organisms_opt = organisms_json.map(shared.opt_creator)
-    let nomeclature_opt = nomeclature_json.map(shared.opt_creator_nomeclature)
-    let plant_family_opt = plant_family_json.map(shared.opt_creator)
-    let plant_organ_opt = plant_organ_json.map(shared.opt_creator_organ)
 
+    let name_lab_json = await mi_services.get_all_name_lab()
+    let name_lab_opt = name_lab_json.map(shared.opt_creator)
+
+    let organisms_json = await mi_services.get_all_organisms()
+    let organisms_opt = organisms_json.map(shared.opt_creator)
+
+    let nomeclature_json = await mi_services.get_all_nomeclature()
+    let nomeclature_opt = nomeclature_json.map(shared.opt_creator_nomeclature)
+
+    let geolocation_json = await mi_services.get_all_geolocation()
     let geolocation_opt = geolocation_json.map(shared.opt_creator_geo)
+
+    let plant_family_json = await shared_services.get_all_plant_family()
+    let plant_family_opt = plant_family_json.map(shared.opt_creator)
+
+    let plant_organ_json = await shared_services.get_all_plant_organ()
+    let plant_organ_opt = plant_organ_json.map(shared.opt_creator_organ)
+    
+    let fungus_class_json = await taxonomy_services.get_all_fungus_class()
+    let fungus_class_opt = fungus_class_json.map(shared.opt_creator)
+
+    let taxonomy_lvl_json = await taxonomy_services.get_all_taxonomy_lvls()
+    let taxonomy_lvl_opt = taxonomy_lvl_json.map(shared.opt_creator)
 
     
     this.setState({

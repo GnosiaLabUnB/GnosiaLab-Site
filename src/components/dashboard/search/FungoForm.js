@@ -4,7 +4,8 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
-import CreatableSelect from 'react-select/creatable'
+import Select from 'react-select';
+
 import FormLabel from '../../shared/FormLabel';
 
 
@@ -25,28 +26,28 @@ class HeaderTitle extends React.Component {
               </Form.Group>
               <Form.Group as={Col} controlId="" className="mb-3">
                 <FormLabel label="Plant Organ" />
-                <CreatableSelect isClearable />
+                <Select isClearable options={this.props.plant_organ}/>
               </Form.Group>
             </Row>
             <Row>
               <Form.Group as={Col} controlId="" className="mb-3">
                 <FormLabel label="Growth Medium" />
-                <Form.Control type="text" placeholder="Enter medium" />
+                <Select isClearable options={this.props.growth_medium}/>
               </Form.Group>
 
               <Form.Group as={Col} controlId="" className="mb-3">
                 <FormLabel label="Solvent" />
-                <Form.Control type="text" placeholder="Enter solvent" />
+                <Select isClearable options={this.props.solvent}/>
               </Form.Group>
 
               <Form.Group as={Col} controlId="" className="mb-3">
                 <FormLabel label="Origin Matrix" />
-                <CreatableSelect isClearable />
+                <Select isClearable options={this.props.origin_matrix}/>
               </Form.Group>
             </Row>
           </Form>
           <Button className='float-end mt-4' variant="primary" type="submit">
-            Submit
+            Search
           </Button>  
         </>
       )

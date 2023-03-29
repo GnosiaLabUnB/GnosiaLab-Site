@@ -1,4 +1,21 @@
 
+export function opt_creator_vegetation(v) {
+  v = {
+    value: v["id"],
+    label: v["local"]
+  };
+  return v;
+}
+
+
+export function opt_creator_deposit_collector(v) {
+  v = {
+    value: v["id"],
+    label: v["number"]
+  };
+  return v;
+}
+
 export function opt_creator(v) {
       v = {
         value: v["id"],
@@ -14,7 +31,6 @@ export function opt_creator_address(v) {
     };
     return v;
 }
-
 
 
 export function opt_creator_organ(v) {

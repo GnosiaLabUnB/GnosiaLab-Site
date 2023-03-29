@@ -58,7 +58,7 @@ class About extends React.Component {
                 </Col>
             </ContentWrapper>
             <ContentWrapper color='white'>
-                <h2 style={{textAlign: "center", width:"100%"}}>Collaborators</h2>
+                <h2 style={{textAlign: "center", width:"100%"}}>Partners</h2>
                 <Col lg={3}>
                     <Row>
                         <MemberCard></MemberCard>
@@ -82,7 +82,7 @@ class About extends React.Component {
             </ContentWrapper>
 
             <ContentWrapper color='var(--bs-blue)'>
-                <h2 style={{textAlign: "center", width:"100%"}}>Partners</h2>
+                <h2 style={{textAlign: "center", width:"100%"}}>Sponsors</h2>
                 <Row>
                 </Row>
             </ContentWrapper>
