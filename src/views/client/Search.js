@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import SearchForm from '../../components/client/search/SearchForm';
-import CompostCard from "../../components/client/CompostCard";
+import CompostCard from "../../components/shared/PlantCard";
 import PageWrapper from '../../components/client/shared/PageWrapper';
 
 

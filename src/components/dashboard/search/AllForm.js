@@ -9,7 +9,23 @@ import Select from 'react-select';
 import FormLabel from '../../shared/FormLabel';
 
 import * as shared from '../../../services/shared.js';
+import * as search from '../../../services/search.js';
 
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
+const react_select_schema = yup.object().shape({
+    label: yup.string().required(),
+    value: yup.string().required(),
+})
+
+const schema = yup.object().shape({
+    search_id: yup.string().nullable(),
+    solvent: react_select_schema.nullable(),
+    plant_organ: react_select_schema.nullable(),
+    plant_family: react_select_schema.nullable(),
+    plant_species: react_select_schema.nullable(),
+});
 
 class AllForm extends React.Component {
 
@@ -19,6 +35,7 @@ class AllForm extends React.Component {
         this.state = {
             plant_species_opt: []
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e, key) {
@@ -29,23 +46,65 @@ class AllForm extends React.Component {
                 let search_json = this.props.plant_family_json
                 let new_json = shared.search_dict(e, search_json)["species"]
                 let new_opt = new_json.map(shared.opt_creator)
-                this.setState({plant_species_opt: new_opt});
-            }  
-        } 
-      };
+                this.setState({ plant_species_opt: new_opt });
+            }
+        }
+    };
+
+
+    async handleSubmit(schema) {
+        console.log("Searching for all com o schema:");
+        console.log(schema);
+        let result_json = await search.search_all(schema);
+        this.props.searchViewCallback(result_json);
+    }
+
 
     render() {
+        let formclass = "mb-3"
         return (
-            <>
-                <Form>
+            <Formik
+                validationSchema={schema}
+                onSubmit={this.handleSubmit}
+                initialValues={{
+                    search_id: '',
+                    solvent: null,
+                    plant_organ: null,
+                    plant_family: null,
+                    plant_species: null,
+                }}
+            >
+                {({
+                    handleSubmit,
+                    handleChange,
+                    handleBlur,
+                    setFieldValue,
+                    values,
+                    touched,
+                    isValid,
+                    errors,
+                }) => (
+                <Form onSubmit={handleSubmit}>
                     <Row>
-                        <Form.Group as={Col} controlId="" className="mb-3">
+                        <Form.Group as={Col} className={formclass}>
                             <FormLabel label="ID" />
-                            <Form.Control type="text" placeholder="Enter ID" />
+                            <Form.Control 
+                                type="text" 
+                                name="search_id"
+                                value={values.search_id}
+                                onChange={handleChange}
+                                placeholder="Enter ID" />
                         </Form.Group>
-                        <Form.Group as={Col} controlId="" className="mb-3">
+                        <Form.Group as={Col} className={formclass}>
                             <FormLabel label="Solvent" />
-                            <Select isClearable options={this.props.solvent}/>
+                            <Select isClearable 
+                                name="solvent"
+                                value={values.solvent}
+                                onChange={
+                                    async (e) =>
+                                    await setFieldValue('solvent', e)
+                                }
+                                options={this.props.solvent} />
                         </Form.Group>
                     </Row>
                     <Accordion>
@@ -53,33 +112,53 @@ class AllForm extends React.Component {
                             <Accordion.Header>Informações da Planta</Accordion.Header>
                             <Accordion.Body>
                                 <Row className='mt-2'>
-                                    <Form.Group as={Col} controlId="" className="mb-3">
+                                    <Form.Group as={Col} className={formclass}>
                                         <FormLabel label="Organ" />
-                                        <Select isClearable options={this.props.plant_organ}/>
+                                        <Select isClearable 
+                                            name="plant_organ"
+                                            value={values.plant_organ}
+                                            onChange={
+                                                async (e) =>
+                                                await setFieldValue('plant_organ', e)
+                                            }
+                                            options={this.props.plant_organ}/>
                                     </Form.Group>
-                                    <Form.Group as={Col} controlId="" className="mb-3">
+                                    <Form.Group as={Col} className={formclass}>
                                         <FormLabel label="Family" />
                                         <Select isClearable
-                                            options={this.props.plant_family}
-                                            onChange={(e) => this.handleChange(e, "plant_species")}
-                                        />
+                                            name="plant_family"
+                                            value={values.plant_family}
+                                            onChange={
+                                                async (e) => {
+                                                    await setFieldValue('plant_family', e)
+                                                    this.handleChange(e, "plant_species")
+                                                }
+                                            }
+                                            options={this.props.plant_family}/>
                                     </Form.Group>
-                                    <Form.Group as={Col} controlId="" className="mb-3">
+                                    <Form.Group as={Col} className={formclass}>
                                         <FormLabel label="Species" />
                                         <Select isClearable
+                                            name="plant_species"
+                                            value={values.plant_species}
+                                            onChange={
+                                                async (e) =>
+                                                await setFieldValue('plant_species', e)
+                                            }
                                             ref={this.species_select_ref}
                                             isDisabled={!this.state.plant_species_opt.length}
-                                            options={this.state.plant_species_opt}/>
+                                            options={this.state.plant_species_opt} />
                                     </Form.Group>
                                 </Row>
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
-                </Form>
-                <Button className='float-end mt-4' variant="primary" type="submit">
+                    <Button className='float-end mt-4' variant="primary" type="submit">
                     Search
-                </Button>
-            </>
+                    </Button>
+                </Form>
+                )}
+            </Formik>
         )
     }
 }

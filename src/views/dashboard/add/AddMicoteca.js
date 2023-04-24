@@ -7,7 +7,6 @@ import Form from 'react-bootstrap/Form'
 import FormLabel from '../../../components/shared/FormLabel';
 import CreatableSelect from 'react-select/creatable';
 
-
 import * as mi_services from '../../../services/myco_info'
 import * as shared_services from '../../../services/shared_info'
 import * as shared from '../../../services/shared.js'
