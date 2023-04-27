@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Accordion from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ToggleButton from 'react-bootstrap/ToggleButton'
 
 import Select from 'react-select';
 import FormLabel from '../../shared/FormLabel';
@@ -14,56 +16,25 @@ import * as search from '../../../services/search.js';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+const react_select_schema = yup.object().shape({
+    label: yup.string().required(),
+    value: yup.string().required(),
+})
+
 const schema = yup.object().shape({
     search_id: yup.string().nullable(),
-    scientific_name: yup.object().shape({
-      label: yup.string().required(),
-      value: yup.string().required(),
-    }).nullable(),
-    organism: yup.object().shape({
-      label: yup.string().required(),
-      value: yup.string().required(),
-    }).nullable(),
-    organism_type: yup.object().shape({
-      label: yup.string().required(),
-      value: yup.string().required(),
-    }).nullable(),
-    taxo_lvl: yup.object().shape({
-      label: yup.string().required(),
-      value: yup.string().required(),
-    }).nullable(),
-    fungus_class: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-      }).nullable(),
-    fungus_genus: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-    }).nullable(),
-    fungus_family: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-    }).nullable(),
-    fungus_order: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-    }).nullable(),
-    fungus_species: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-    }).nullable(),
-    plant_organ: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-    }).nullable(),
-    plant_family: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-    }).nullable(),
-    plant_species: yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-    }).nullable()
+    scientific_name: react_select_schema.nullable(),
+    organism: react_select_schema.nullable(),
+    organism_type: react_select_schema.nullable(),
+    taxo_lvl: react_select_schema.nullable(),
+    fungus_class: react_select_schema.nullable(),
+    fungus_genus: react_select_schema.nullable(),
+    fungus_family: react_select_schema.nullable(),
+    fungus_order: react_select_schema.nullable(),
+    fungus_species: react_select_schema.nullable(),
+    plant_organ: react_select_schema.nullable(),
+    plant_family: react_select_schema.nullable(),
+    plant_species: react_select_schema.nullable()
 });
 
 class MycoForm extends React.Component {
@@ -90,6 +61,7 @@ class MycoForm extends React.Component {
             fungus_genus: [],
             fungus_genus_json: {},
             fungus_species: [],
+            radioValue: '1'
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -152,6 +124,12 @@ class MycoForm extends React.Component {
 
     render() {
         let formclass = "mb-3"
+
+        const radios = [
+            { name: 'AND Search', value: '1' },
+            { name: 'OR Search', value: '2' },
+        ];
+
         return (
             <Formik
                 validationSchema={schema}
@@ -372,9 +350,31 @@ class MycoForm extends React.Component {
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
-                    <Button className='float-end mt-4' variant="primary" type="submit">
-                    Search
-                    </Button>
+                    <Row>
+                    <Col lg={6}>
+                        <ButtonGroup key={"mico_form_search"} className='float-start mt-3' style={{zIndex: '0'}}>
+                        {radios.map((radio, idx) => (
+                            <ToggleButton
+                            key={"m"+idx}
+                            id={`radio-m${idx}`}
+                            type="radio"
+                            variant={'outline-secondary'}
+                            name="radio"
+                            value={radio.value}
+                            checked={this.state.radioValue === radio.value}
+                            onChange={(e) => this.setState({radioValue: e.currentTarget.value})}
+                            >
+                            {radio.name}
+                            </ToggleButton>
+                        ))}
+                        </ButtonGroup>
+                    </Col>
+                    <Col lg={6}>
+                        <Button className='float-end mt-3' variant="primary" type="submit">
+                        Search
+                        </Button>
+                    </Col>
+                    </Row>
                 </Form>
                 )}
             </Formik>

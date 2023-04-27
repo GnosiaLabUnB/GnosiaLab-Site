@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Accordion from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ToggleButton from 'react-bootstrap/ToggleButton'
 
 import Select from 'react-select';
 import FormLabel from '../../shared/FormLabel';
@@ -53,7 +55,8 @@ class ExtratoForm extends React.Component {
         this.state = {
             plant_species: [],
             deposit_opt: props.deposit_opt,
-            collector_opt: props.collector_opt
+            collector_opt: props.collector_opt,
+            radioValue: '1'
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -93,6 +96,11 @@ class ExtratoForm extends React.Component {
 
     render() {
         let formclass = "mb-3"
+        const radios = [
+            { name: 'AND Search', value: '1' },
+            { name: 'OR Search', value: '2' },
+          ];
+
         return (
             <Formik
                 validationSchema={schema}
@@ -340,9 +348,31 @@ class ExtratoForm extends React.Component {
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>
-                        <Button className='float-end mt-4' variant="primary" type="submit">
+                        <Row>
+                        <Col lg={6}>
+                            <ButtonGroup key={"extract_form_search"} className='float-start mt-3' style={{zIndex: '0'}}>
+                            {radios.map((radio, idx) => (
+                                <ToggleButton
+                                key={"e"+idx}
+                                id={`radio-e${idx}`}
+                                type="radio"
+                                variant={'outline-secondary'}
+                                name="radio"
+                                value={radio.value}
+                                checked={this.state.radioValue === radio.value}
+                                onChange={(e) => this.setState({radioValue: e.currentTarget.value})}
+                                >
+                                {radio.name}
+                                </ToggleButton>
+                            ))}
+                            </ButtonGroup>
+                        </Col>
+                        <Col lg={6}>
+                            <Button className='float-end mt-3' variant="primary" type="submit">
                             Search
-                        </Button>
+                            </Button>
+                        </Col>
+                        </Row>
                     </Form>
                 )}
             </Formik>
