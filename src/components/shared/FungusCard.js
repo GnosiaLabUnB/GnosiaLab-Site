@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import CompostInfo from './CompostInfo';
+import FungusInfo from './FungusInfo';
 
 import {GiMushroom} from 'react-icons/gi';
 import {ImLab} from 'react-icons/im';
@@ -80,7 +80,7 @@ class FungusCard extends React.Component {
                     </Card.Footer>
                 </Card>
 
-                <CompostInfo
+                <FungusInfo
                     show={this.state.modalShow}
                     onHide={() => this.setState({ modalShow: false })}
                     info={this.props.result}

@@ -1,6 +1,7 @@
+import { BASE_URL } from "./base"
 
 export async function get_all_treatments() {
-    return fetch('http://localhost:8000/api/treatment/', {
+    return fetch(BASE_URL + '/api/myco_info/treatment/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -15,7 +16,7 @@ export async function get_all_treatments() {
 }
 
 export async function get_all_organisms() {
-    return fetch('http://localhost:8000/api/organism/', {
+    return fetch(BASE_URL + '/api/myco_info/organism/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -29,8 +30,23 @@ export async function get_all_organisms() {
     })
 }
 
+export async function get_all_organisms_type() {
+  return fetch(BASE_URL + '/api/myco_info/organism_type/', {
+    method: 'GET',
+    headers: {
+      'accept': 'application/json'
+    }
+  })
+  .then((response) => {
+    return response.json()
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
 export async function get_all_name_lab() {
-    return fetch('http://localhost:8000/api/name_lab/', {
+    return fetch(BASE_URL + '/api/myco_info/name_lab/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -45,7 +61,7 @@ export async function get_all_name_lab() {
 }
 
 export async function get_all_nomeclature() {
-    return fetch('http://localhost:8000/api/nomeclature/', {
+    return fetch(BASE_URL + '/api/myco_info/nomeclature/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -60,7 +76,7 @@ export async function get_all_nomeclature() {
 }
 
 export async function get_all_geolocation() {
-    return fetch('http://localhost:8000/api/geolocation/', {
+    return fetch(BASE_URL + '/api/geolocation/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'

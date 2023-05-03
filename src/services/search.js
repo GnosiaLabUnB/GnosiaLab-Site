@@ -1,6 +1,7 @@
+import { BASE_URL } from "./base"
+
 export async function search_all(schema) {
   
-    
     let search_params = {
         search_id: schema.search_id,
         solvent_id: schema.solvent?.value,
@@ -18,7 +19,7 @@ export async function search_all(schema) {
       }
     } 
   
-    return fetch('http://localhost:8000/api/search/all?' +
+    return fetch(BASE_URL + '/api/search/all?' +
       new URLSearchParams(search_params),
       {
         method: 'GET',
@@ -66,7 +67,7 @@ export async function search_extract(schema) {
       }
     } 
   
-    return fetch('http://localhost:8000/api/search/plant?' +
+    return fetch(BASE_URL + '/api/search/plant?' +
       new URLSearchParams(search_params),
       {
         method: 'GET',
@@ -104,7 +105,7 @@ export async function search_microorgs(schema) {
       }
     } 
   
-    return fetch('http://localhost:8000/api/search/fungus?' +
+    return fetch(BASE_URL + '/api/search/fungus?' +
       new URLSearchParams(search_params),
       {
         method: 'GET',
@@ -149,7 +150,7 @@ export async function search_myco(schema) {
       }
     } 
   
-    return fetch('http://localhost:8000/api/search/myco?' +
+    return fetch(BASE_URL + '/api/search/myco?' +
       new URLSearchParams(search_params),
       {
         method: 'GET',

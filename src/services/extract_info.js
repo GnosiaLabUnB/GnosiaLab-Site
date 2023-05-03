@@ -1,6 +1,7 @@
+import {BASE_URL} from './base.js'
 
 export async function get_all_deposits() {
-  return fetch('http://localhost:8000/api/deposit/', {
+  return fetch(BASE_URL + '/api/deposit/', {
     method: 'GET',
     headers: {
       'accept': 'application/json'
@@ -16,7 +17,7 @@ export async function get_all_deposits() {
 
 
 export async function get_all_collectors() {
-  return fetch('http://localhost:8000/api/deposit/collectors/', {
+  return fetch(BASE_URL + '/api/deposit/collectors/', {
     method: 'GET',
     headers: {
       'accept': 'application/json'
@@ -32,7 +33,7 @@ export async function get_all_collectors() {
 
 
 export async function get_all_herbarium() {
-  return fetch('http://localhost:8000/api/deposit/herbarium/', {
+  return fetch(BASE_URL + '/api/deposit/herbarium/', {
     method: 'GET',
     headers: {
       'accept': 'application/json'
@@ -48,7 +49,7 @@ export async function get_all_herbarium() {
 
 
 export async function get_all_collectors_names() {
-  return fetch('http://localhost:8000/api/deposit/collectors_name/', {
+  return fetch(BASE_URL + '/api/deposit/collectors_name/', {
     method: 'GET',
     headers: {
       'accept': 'application/json'
@@ -64,7 +65,7 @@ export async function get_all_collectors_names() {
 
 
 export async function get_all_vegetation() {
-  return fetch('http://localhost:8000/api/vegetation/', {
+  return fetch(BASE_URL + '/api/vegetation/', {
     method: 'GET',
     headers: {
       'accept': 'application/json'
@@ -81,7 +82,7 @@ export async function get_all_vegetation() {
 
 
 export async function get_all_origin() {
-    return fetch('http://localhost:8000/api/origin/', {
+    return fetch(BASE_URL + '/api/extract_info/origin/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -97,7 +98,7 @@ export async function get_all_origin() {
 
 
 export async function get_all_taxonomic_sys() {
-    return fetch('http://localhost:8000/api/taxonomic_sys/', {
+    return fetch(BASE_URL + '/api/extract_info/taxonomic_sys/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -114,7 +115,7 @@ export async function get_all_taxonomic_sys() {
 
 
 export async function get_all_soil() {
-    return fetch('http://localhost:8000/api/soil/', {
+    return fetch(BASE_URL + '/api/extract_info/soil/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -131,7 +132,7 @@ export async function get_all_soil() {
 
 
 export async function get_all_extract_method() {
-    return fetch('http://localhost:8000/api/extract_method/', {
+    return fetch(BASE_URL + '/api/extract_info/extract_method/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -145,8 +146,23 @@ export async function get_all_extract_method() {
     })
 }
 
+export async function get_all_extracts() {
+  return fetch(BASE_URL + '/api/extract_info/extract_type/', {
+    method: 'GET',
+    headers: {
+      'accept': 'application/json'
+    }
+  })
+  .then((response) => {
+    return response.json()
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
 export async function get_all_addresses() {
-    return fetch('http://localhost:8000/api/address/', {
+    return fetch(BASE_URL + '/api/address/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -161,7 +177,7 @@ export async function get_all_addresses() {
 }
 
 export async function get_all_cities() {
-  return fetch('http://localhost:8000/api/address/city/', {
+  return fetch(BASE_URL + '/api/address/city/', {
     method: 'GET',
     headers: {
       'accept': 'application/json'
@@ -176,7 +192,7 @@ export async function get_all_cities() {
 }
 
 export async function get_all_states() {
-  return fetch('http://localhost:8000/api/address/state/', {
+  return fetch(BASE_URL + '/api/address/state/', {
     method: 'GET',
     headers: {
       'accept': 'application/json'
@@ -189,3 +205,4 @@ export async function get_all_states() {
     console.log(error)
   })
 }
+

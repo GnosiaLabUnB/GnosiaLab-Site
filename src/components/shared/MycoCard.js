@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import CompostInfo from './CompostInfo';
+import MycoInfo from './MycoInfo';
 
 import {GiMushroom} from 'react-icons/gi';
 
@@ -40,7 +40,7 @@ class MycoCard extends React.Component {
                                         <b>Organism: </b>{this.props.result?.organism_type?.description}
                                     </p>
                                     <p className="mb-1">
-                                        <b>Taxonomy: </b>
+                                        <b>Taxonomy: </b> {this.props.result?.fungus_class?.description}; {this.props.result?.fungus_order?.description}; {this.props.result?.fungus_family?.description}; {this.props.result?.fungus_genus?.description}; {this.props.result?.fungus_species?.description}
                                     </p>
                                     <p className="mb-1">
                                         <b>Plant: </b>
@@ -78,7 +78,7 @@ class MycoCard extends React.Component {
                     </Card.Footer>
                 </Card>
 
-                <CompostInfo
+                <MycoInfo
                     show={this.state.modalShow}
                     onHide={() => this.setState({ modalShow: false })}
                     info={this.props.result}

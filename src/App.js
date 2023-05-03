@@ -1,10 +1,10 @@
-
 import { NavRouter } from './routes'
 
 function App() {
+
   return (
     <div className="App">
-      <NavRouter/>
+      <NavRouter />
     </div>
   );
 }

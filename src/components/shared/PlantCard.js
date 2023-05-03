@@ -3,12 +3,13 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import CompostInfo from './CompostInfo';
+import PlantInfo from './PlantInfo';
 
 import moment from 'moment';
 
 import { RiPlantFill } from 'react-icons/ri';
 import { ImLab } from 'react-icons/im';
+
 
 class PlantCard extends React.Component {
 
@@ -80,11 +81,10 @@ class PlantCard extends React.Component {
           </Card.Footer>
         </Card>
 
-        <CompostInfo
+        <PlantInfo
           show={this.state.modalShow}
           onHide={() => this.setState({ modalShow: false })}
-          info={this.props.result}
-        />
+          info={this.props.result}/>
       </>
     )
   }
