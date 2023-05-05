@@ -7,8 +7,7 @@ import CreatableSelect from 'react-select/creatable';
 
 import FormLabel from '../../../components/shared/FormLabel';
 
-import * as fi_services from '../../../services/fungus_info.js'
-import * as shared_services from '../../../services/shared_info'
+import {API_PATHS, get_all} from '../../../services/base.js'
 import * as shared from '../../../services/shared.js'
 
 class AddFungo extends React.Component {
@@ -30,12 +29,12 @@ class AddFungo extends React.Component {
   }
 
   async componentDidMount() {
-    let growth_condition_json = await fi_services.get_all_growth_condition()
-    let growth_medium_json = await fi_services.get_all_growth_medium()
-    let locations_json = await fi_services.get_all_locations()
-    let origin_matrix_json = await fi_services.get_all_origin_matrix()
-    let solvent_json = await shared_services.get_all_solvents()
-    let plant_organ_json = await shared_services.get_all_plant_organ()
+    let growth_condition_json = await get_all(API_PATHS.growth_condition)
+    let growth_medium_json = await get_all(API_PATHS.growth_medium)
+    let locations_json = await get_all(API_PATHS.locations)
+    let origin_matrix_json = await get_all(API_PATHS.origin_matrix)
+    let solvent_json = await get_all(API_PATHS.solvent)
+    let plant_organ_json = await get_all(API_PATHS.plant_organ)
     
     let solvent_opt = solvent_json.map(shared.opt_creator)
     let plant_organ_opt = plant_organ_json.map(shared.opt_creator_organ)

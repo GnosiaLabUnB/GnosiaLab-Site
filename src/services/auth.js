@@ -12,7 +12,6 @@ export async function login(email, password) {
         )
       })
       .then((response) => {
-        // console.log(response.json())
         return response.json()
       })
       .catch((error) => {

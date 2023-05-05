@@ -7,10 +7,8 @@ import Form from 'react-bootstrap/Form'
 import FormLabel from '../../../components/shared/FormLabel';
 import CreatableSelect from 'react-select/creatable';
 
-import * as mi_services from '../../../services/myco_info'
-import * as shared_services from '../../../services/shared_info'
+import {API_PATHS, get_all} from '../../../services/base.js'
 import * as shared from '../../../services/shared.js'
-import * as taxonomy_services from '../../../services/taxonomy.js'
 
 class AddMicoteca extends React.Component {
 
@@ -44,31 +42,31 @@ class AddMicoteca extends React.Component {
   }
 
   async componentDidMount() {
-    let treatments_json = await mi_services.get_all_treatments()
+    let treatments_json = await get_all(API_PATHS.treatments)
     let treatments_opt = treatments_json.map(shared.opt_creator)
 
-    let name_lab_json = await mi_services.get_all_name_lab()
+    let name_lab_json = await get_all(API_PATHS.name_lab)
     let name_lab_opt = name_lab_json.map(shared.opt_creator)
 
-    let organisms_json = await mi_services.get_all_organisms()
+    let organisms_json = await get_all(API_PATHS.organism)
     let organisms_opt = organisms_json.map(shared.opt_creator)
 
-    let nomeclature_json = await mi_services.get_all_nomeclature()
+    let nomeclature_json = await get_all(API_PATHS.nomeclature)
     let nomeclature_opt = nomeclature_json.map(shared.opt_creator_nomeclature)
 
-    let geolocation_json = await mi_services.get_all_geolocation()
+    let geolocation_json = await get_all(API_PATHS.geolocation)
     let geolocation_opt = geolocation_json.map(shared.opt_creator_geo)
 
-    let plant_family_json = await shared_services.get_all_plant_family()
+    let plant_family_json = await get_all(API_PATHS.plant_family)
     let plant_family_opt = plant_family_json.map(shared.opt_creator)
 
-    let plant_organ_json = await shared_services.get_all_plant_organ()
+    let plant_organ_json = await get_all(API_PATHS.plant_organ)
     let plant_organ_opt = plant_organ_json.map(shared.opt_creator_organ)
     
-    let fungus_class_json = await taxonomy_services.get_all_fungus_class()
+    let fungus_class_json = await get_all(API_PATHS.fungi_class)
     let fungus_class_opt = fungus_class_json.map(shared.opt_creator)
 
-    let taxonomy_lvl_json = await taxonomy_services.get_all_taxonomy_lvls()
+    let taxonomy_lvl_json = await get_all(API_PATHS.taxonomy_lvl)
     let taxonomy_lvl_opt = taxonomy_lvl_json.map(shared.opt_creator)
 
     

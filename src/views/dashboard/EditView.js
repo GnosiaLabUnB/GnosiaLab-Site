@@ -8,11 +8,7 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container';
 import Select from 'react-select';
 
-import * as extract_services from '../../services/extract_info';
-import * as fungus_services from '../../services/fungus_info';
-import * as myco_services from '../../services/myco_info';
-import * as shared_services from '../../services/shared_info';
-import * as taxo_services from '../../services/taxonomy';
+import {API_PATHS, get_all} from '../../services/base.js';
 
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
 
@@ -28,39 +24,36 @@ class EditView extends React.Component {
   render() {
 
     const editOptions = [
-      { value: extract_services.get_all_addresses, label: 'Address' },
-      { value: extract_services.get_all_cities, label: 'City' },
-      { value: extract_services.get_all_states, label: 'State' },
-      { value: extract_services.get_all_extract_method, label: 'Extract Method' },
-      { value: extract_services.get_all_soil, label: 'Soil' },
-      { value: extract_services.get_all_taxonomic_sys, label: 'Taxonomic System' },
-      { value: extract_services.get_all_vegetation, label: 'Vegetation' },
-      { value: extract_services.get_all_origin, label: 'Origin' },
-      { value: extract_services.get_all_extracts, label: 'Extract Type' },
-      { value: shared_services.get_all_plant_organ, label: 'Plant Organ' },
-      { value: shared_services.get_all_solvents, label: 'Solvent' },
-      { value: shared_services.get_all_plant_family, label: 'Plant Family' },
-      { value: shared_services.get_all_plant_species, label: 'Plant Species' },
-
-      { value: taxo_services.get_all_taxonomy_lvls, label: 'Taxonomic Level' },
-      { value: taxo_services.get_all_fungus_species, label: 'Fungus Species' },
-      { value: taxo_services.get_all_fungus_order, label: 'Fungus Order' },
-      { value: taxo_services.get_all_fungus_genus, label: 'Fungus Genus' },
-      { value: taxo_services.get_all_fungus_family, label: 'Fungus Family' },
-      { value: taxo_services.get_all_fungus_class, label: 'Fungus Class' },
-
-      { value: fungus_services.get_all_origin_matrix, label: 'Origin Matrix' },
-      { value: fungus_services.get_all_growth_medium, label: 'Growth Medium' },
-      { value: fungus_services.get_all_growth_condition, label: 'Growth Condition' },
-      { value: myco_services.get_all_organisms, label: 'Organism' },
-      { value: myco_services.get_all_organisms_type, label: 'Origanism Type' },
-      { value: myco_services.get_all_nomeclature, label: 'Nomeclature' },
-      { value: myco_services.get_all_name_lab, label: 'Name Lab' },
-      { value: myco_services.get_all_treatments, label: 'Treatment' },
-      { value: myco_services.get_all_geolocation, label: 'Geolocation' },
-
-      { value: shared_services.get_all_box, label: 'Box' },
-      { value: shared_services.get_all_freezer, label: 'Freezer' },
+      { value: API_PATHS.address, label: 'Address' },
+      { value: API_PATHS.city, label: 'City' },
+      { value: API_PATHS.state, label: 'State' },
+      { value: API_PATHS.extract_method, label: 'Extract Method' },
+      { value: API_PATHS.soil, label: 'Soil' },
+      { value: API_PATHS.taxo_sys, label: 'Taxonomic System' },
+      { value: API_PATHS.vegetation, label: 'Vegetation' },
+      { value: API_PATHS.origin, label: 'Origin' },
+      { value: API_PATHS.extract_type, label: 'Extract Type' },
+      { value: API_PATHS.plant_organ, label: 'Plant Organ' },
+      { value: API_PATHS.solvent, label: 'Solvent' },
+      { value: API_PATHS.plant_family, label: 'Plant Family' },
+      { value: API_PATHS.plant_species, label: 'Plant Species' },
+      { value: API_PATHS.taxonomy_lvl, label: 'Taxonomic Level' },
+      { value: API_PATHS.fungi_species, label: 'Fungus Species' },
+      { value: API_PATHS.fungi_order, label: 'Fungus Order' },
+      { value: API_PATHS.fungi_genus, label: 'Fungus Genus' },
+      { value: API_PATHS.fungi_family, label: 'Fungus Family' },
+      { value: API_PATHS.fungi_class, label: 'Fungus Class' },
+      { value: API_PATHS.origin_matrix, label: 'Origin Matrix' },
+      { value: API_PATHS.growth_medium, label: 'Growth Medium' },
+      { value: API_PATHS.growth_condition, label: 'Growth Condition' },
+      { value: API_PATHS.organism, label: 'Organism' },
+      { value: API_PATHS.organism_type, label: 'Origanism Type' },
+      { value: API_PATHS.nomeclature, label: 'Nomeclature' },
+      { value: API_PATHS.name_lab, label: 'Name Lab' },
+      { value: API_PATHS.treatments, label: 'Treatment' },
+      { value: API_PATHS.geolocation, label: 'Geolocation' },
+      { value: API_PATHS.box, label: 'Box' },
+      { value: API_PATHS.freezer, label: 'Freezer' },
       // { value: 'vanilla', label: 'Deposit Data' },
       // { value: 'vanilla', label: 'Herbarium' },
       // { value: 'vanilla', label: 'Collector Name' },
@@ -78,7 +71,7 @@ class EditView extends React.Component {
           <Select
             options={editOptions}
             onChange={async (e) => {
-              let query_result = await e.value()
+              let query_result = await get_all(e.value)
               this.setState({ result: query_result }, () => {
                 console.log(this.state.result);
               });

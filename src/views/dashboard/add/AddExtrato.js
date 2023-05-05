@@ -9,8 +9,7 @@ import FormLabel from '../../../components/shared/FormLabel';
 import CreatableSelect from 'react-select/creatable';
 
 
-import * as ext_services from '../../../services/extract_info.js'
-import * as shared_services from '../../../services/shared_info'
+import {API_PATHS, get_all} from '../../../services/base.js'
 import * as shared from '../../../services/shared.js'
 
 
@@ -39,13 +38,13 @@ class AddExtrato extends React.Component {
       }
     
       async componentDidMount() {
-        let origin_json = await ext_services.get_all_origin()
-        let taxonomic_sys_json = await ext_services.get_all_taxonomic_sys()
-        let soil_json = await ext_services.get_all_soil()
-        let ext_method_json = await ext_services.get_all_extract_method()
-        let solvent_json = await shared_services.get_all_solvents()
-        let plant_organ_json = await shared_services.get_all_plant_organ()
-        let full_address_json = await ext_services.get_all_addresses()
+        let origin_json = await get_all(API_PATHS.origin)
+        let taxonomic_sys_json = await get_all(API_PATHS.taxo_sys)
+        let soil_json = await get_all(API_PATHS.soil)
+        let ext_method_json = await get_all(API_PATHS.extract_method)
+        let solvent_json = await get_all(API_PATHS.solvent)
+        let plant_organ_json = await get_all(API_PATHS.plant_organ)
+        let full_address_json = await get_all(API_PATHS.address)
         
         let address_opt = full_address_json.map(shared.opt_creator_address)
         let solvent_opt = solvent_json.map(shared.opt_creator)
