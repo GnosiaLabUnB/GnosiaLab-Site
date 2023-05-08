@@ -53,16 +53,20 @@ function LoginForm () {
                 isValid,
                 errors,
             }) => (
-                <Form onSubmit={handleSubmit}>
+                <Form noValidate onSubmit={handleSubmit}>
                     <Row>
-                        <Form.Group className="mb-3">
+                        <Form.Group className="position-relative mb-3">
                             <FormLabel label="Email" />
                             <Form.Control 
                                 name="email"
                                 value={values.email}
                                 onChange={handleChange}
                                 type="email" 
+                                isInvalid={!!errors.email}
                                 placeholder="Enter email"/>
+                            <Form.Control.Feedback type="invalid" tooltip>
+                                Email Invalid
+                            </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
                     <Row>

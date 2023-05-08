@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import  Row  from 'react-bootstrap/Row';
 import  Col  from 'react-bootstrap/Col';
@@ -9,6 +9,7 @@ import {AiFillDashboard, AiFillFileAdd, AiFillEdit, AiFillDatabase, AiFillContac
 import { Link } from 'react-router-dom'
 
 import { useAuth } from "../../../context/UserContext";
+import { get_user } from '../../../services/auth';
 
 
 
@@ -17,12 +18,27 @@ import '../../../assets/css/sidebar.css'
 
 const LeftNavbar = () => {
 
+    const [userInfo, setUserInfo] = useState(null);
+    const {cookies, logout} = useAuth();
 
-    const {logout} = useAuth();
     function handleSubmit(schema) {
         logout();
     }
-    
+
+    useEffect(() => {
+        async function fetchUserData() {
+            let user_info = await get_user(cookies.token)
+            setUserInfo(user_info)
+        }
+        fetchUserData()
+    }, [cookies]);
+
+
+    function map_role(role_id) {
+        if (role_id === 1){
+            return "Administrator"
+        }
+    }
 
     return (
         <SidebarMenu
@@ -54,9 +70,9 @@ const LeftNavbar = () => {
                             </Col>
                             <Col xl={9} className="p-2">
                             <Card.Body style={{padding: '0.5rem'}}>
-                                <Card.Title className='subtitle_bold pt-2 mb-1' style={{fontSize: '18px'}}>Renato Avellar Nobre</Card.Title>
-                                <Card.Text className='paragraph mb-1' style={{fontSize: '12px'}}>rekanobre@gmail.com</Card.Text>
-                                <Card.Text className='paragraph mb-1' style={{fontSize: '12px'}}>Colaborador</Card.Text>
+                                <Card.Title className='subtitle_bold pt-2 mb-1' style={{fontSize: '18px'}}>{userInfo?.firstname} {userInfo?.lastname}</Card.Title>
+                                <Card.Text className='paragraph mb-1' style={{fontSize: '12px'}}>{userInfo?.username}</Card.Text>
+                                <Card.Text className='paragraph mb-1' style={{fontSize: '12px'}}>{map_role(userInfo?.role)}</Card.Text>
                             </Card.Body>
                             </Col>
                         </Row>

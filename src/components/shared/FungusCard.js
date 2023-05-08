@@ -7,16 +7,28 @@ import FungusInfo from './FungusInfo';
 
 import {GiMushroom} from 'react-icons/gi';
 import {ImLab} from 'react-icons/im';
+import DeleteModal from '../dashboard/shared/DeleteModal';
 
+import { API_PATHS } from '../../services/base';
   
 class FungusCard extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            modalShow: false,
+            infoModalShow: false,
+            deleteModalShow: false
         }
     }
+
+    closeDeleteModal = () => { this.setState({ deleteModalShow: false }); }
+
+    modalCallback = (id = null, caller = null) => {
+        this.setState({ deleteModalShow: false });
+        if (id !== null) {
+          this.props.deleteCallback(id, "fungi", this.props.all)
+        }
+      }
 
     render() {
         return (
@@ -67,24 +79,35 @@ class FungusCard extends React.Component {
                     </Card.Body>
                     <Card.Footer className="text-muted" >
                         <Row style={{ fontSize: '14px' }}>
-                            <Col lg={8} className="mt-1">
+                            <Col lg={6} className="mt-1">
                                 <p className='mb-0'>
                                     <b style={{ color: 'var(--bs-green)' }}>{this.props.result?.availability ? "Available\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0": ""}</b>
                                     <b>Year:</b> {this.props.result?.extraction_year}
                                 </p>
                             </Col>
-                            <Col lg={4}>
-                                <Button className="float-end" variant="outline-info" size="sm" onClick={() => this.setState({ modalShow: true })}>Details</Button>
+                            <Col lg={6}>
+                                <Button className="float-end" variant="outline-info" size="sm" onClick={() => this.setState({ infoModalShow: true })}>Info</Button>
+                                <Button className="float-end me-2" variant="outline-warning" size="sm" onClick={() => this.setState({ modalShow: true })}>Edit</Button>
+                                <Button className="float-end me-2" variant="outline-danger" size="sm" onClick={() => this.setState({ deleteModalShow: true })}>Delete</Button>
                             </Col>
                         </Row>
                     </Card.Footer>
                 </Card>
 
                 <FungusInfo
-                    show={this.state.modalShow}
-                    onHide={() => this.setState({ modalShow: false })}
+                    show={this.state.infoModalShow}
+                    onHide={() => this.setState({ infoModalShow: false })}
                     info={this.props.result}
                 />
+
+                <DeleteModal
+                    close={this.closeDeleteModal}
+                    callback={this.modalCallback}
+                    show={this.state.deleteModalShow}
+                    delete_text={'Deleting this microorganism extract will remove it entirely from the database. Are you sure you want to delete this record?'}
+                    delete_entity_desc={this.props.result?.internal_id}
+                    delete_entity_id={this.props.result?.id}
+                    api_path={API_PATHS.fungi} />
             </>
         )
     }

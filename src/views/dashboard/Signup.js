@@ -17,14 +17,14 @@ class Signup extends React.Component {
                     <LoginImage style={{width:'40%', height: '100%'}} className="mx-auto mt-5 mb-5"/>
                     <Card.Body>
                         <Row>
-                            <h2 className="text-center mt-0 mb-4" style={{ color: 'var(--bs-gray-800)' }}>Sign-up</h2>
+                            <h2 className="text-center mt-0 mb-5" style={{ color: 'var(--bs-gray-800)' }}>Sign-up</h2>
                         </Row>
-                        <Container style={{width: '70%'}} className="mx-auto">
+                        <Container style={{width: '80%'}} className="mx-auto mt-1">
                             <Row>
                                 <SignupForm/>
                             </Row>
                             <Row className='mb-4'>
-                                <img alt="" src="/logo_black.svg" width="30" height="30" className="d-inline-block align-top m-2" />
+                                <img alt="" src="/logo_black.svg" width="30" height="30" className="ms-0 d-inline-block align-top m-2" />
                             </Row>
                         </Container>
                     </Card.Body>

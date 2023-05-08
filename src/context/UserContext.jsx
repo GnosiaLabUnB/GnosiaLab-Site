@@ -2,6 +2,7 @@
 import { createContext, useContext, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+
 import * as api from '../services/auth.js';
 
 const UserContext = createContext();
@@ -14,7 +15,7 @@ export const UserProvider = ({ children }) => {
   const login = async (email, password) => {
     const res = await api.login(email, password);
     console.log(res)
-    setCookies('token', res.access_token, {'secure': true, 'sameSite': 'strict'})
+    setCookies('token', res.access_token, {'secure': true, 'sameSite': 'Strict'})
 
     navigate('/admin');
   };

@@ -7,17 +7,53 @@ import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container';
 import Select from 'react-select';
+import Button from 'react-bootstrap/Button';
 
-import {API_PATHS, get_all} from '../../services/base.js';
+import DeleteModal from '../../components/dashboard/shared/DeleteModal';
 
-import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
+import { API_PATHS, get_all } from '../../services/base.js';
+
+import { AiFillEdit } from 'react-icons/ai'
 
 
 class EditView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: []
+      result: [],
+      del_entity_id: '',
+      del_entity_desc: '',
+      del_text: '',
+      modal_show: false,
+      api_path: null
+    }
+  }
+
+  closeDeleteModal = () => { this.setState({ modal_show: false }); }
+  modalCallback = (id = null, caller = null) => {
+    if (id !== null) {
+      this.setState({result: this.state.result.filter(function (item) {
+        return item["id"] !== id
+      })});
+    }
+  }
+
+  proper_desc(item) {
+
+    let key_type = this.state.api_path
+
+    if (key_type === API_PATHS.address){
+      return item["location"]
+    } else if (key_type === API_PATHS.vegetation){
+      return item["local"] + ' - ' + item['general']
+    } else if (key_type === API_PATHS.nomeclature){
+      return item["scientific_name"]
+    } else if (key_type === API_PATHS.geolocation){
+      return "Lat: " + item["latitude"] + "; Long: " + item["longitude"]
+    } else if (key_type === API_PATHS.plant_organ){
+      return item["organ"]
+    } else {
+      return item["description"]
     }
   }
 
@@ -46,7 +82,7 @@ class EditView extends React.Component {
       { value: API_PATHS.origin_matrix, label: 'Origin Matrix' },
       { value: API_PATHS.growth_medium, label: 'Growth Medium' },
       { value: API_PATHS.growth_condition, label: 'Growth Condition' },
-      { value: API_PATHS.organism, label: 'Organism' },
+      { value: API_PATHS.organisms, label: 'Organism' },
       { value: API_PATHS.organism_type, label: 'Origanism Type' },
       { value: API_PATHS.nomeclature, label: 'Nomeclature' },
       { value: API_PATHS.name_lab, label: 'Name Lab' },
@@ -72,7 +108,10 @@ class EditView extends React.Component {
             options={editOptions}
             onChange={async (e) => {
               let query_result = await get_all(e.value)
-              this.setState({ result: query_result }, () => {
+              this.setState({
+                api_path: e.value,
+                result: query_result
+              }, () => {
                 console.log(this.state.result);
               });
             }
@@ -84,14 +123,14 @@ class EditView extends React.Component {
             <Table striped hover className='mt-3 table_striped_style'>
               <thead>
                 <tr>
-                  { this.state.result.length > 0 && (
-                      <>
-                        <th>ID</th>
-                        <TableHeaders results={this.state.result}/>
-                        <th className='text-center'>Edit</th>
-                        <th className='text-center'>Delete</th>
-                      </>
-                    )
+                  {this.state.result.length > 0 && (
+                    <>
+                      <th>ID</th>
+                      <TableHeaders results={this.state.result} />
+                      <th className='text-center'>Edit</th>
+                      <th className='text-center'>Delete</th>
+                    </>
+                  )
                   }
                 </tr>
               </thead>
@@ -106,7 +145,19 @@ class EditView extends React.Component {
                           <AiFillEdit color={"var(--bs-dark)"} className='mb-1 text-center' size={20} />
                         </td>
                         <td className='text-center'>
-                          <AiFillDelete color={"var(--bs-danger)"} className='mb-1 text-center' size={20} />
+                          <Button size="sm" variant="secondary"
+                            onClick={() => {
+                              this.setState({
+                                del_entity_id: this.state.result[i]["id"],
+                                del_entity_desc: this.proper_desc(this.state.result[i]),
+                                del_text: "Deleting this entity will affect every record containing this value and update it to NULL. Are you sure you want to delete this entity?",
+                                modal_show: true
+                              })
+                            }}>
+                              Delete
+                            {/* <AiFillDelete color={"var(--bs-danger)"} className='mb-1 text-center' size={20} /> */}
+                          </Button>
+
                         </td>
                       </tr>
 
@@ -116,6 +167,15 @@ class EditView extends React.Component {
             </Table>
           </Container>
         </Row>
+
+        <DeleteModal
+          close={this.closeDeleteModal}
+          callback={this.modalCallback}
+          show={this.state.modal_show}
+          delete_text={this.state.del_text}
+          delete_entity_desc={this.state.del_entity_desc}
+          delete_entity_id={this.state.del_entity_id}
+          api_path={this.state.api_path} />
       </>
     )
   }
@@ -124,11 +184,11 @@ class EditView extends React.Component {
 
 
 
-function TableHeaders({results}) {
+function TableHeaders({ results }) {
   if (results.length > 0) {
     return Object.keys(results[0]).map((key, index) => {
       if (key !== "id" && !(results[0][key] instanceof Array)) {
-        
+
         return (<th key={index}>{key.capitalize()}</th>)
       }
       return null

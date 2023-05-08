@@ -2,34 +2,37 @@ export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localho
 
 export async function get_all(api_path) {
     return fetch(BASE_URL + api_path, {
-      method: 'GET',
-      headers: {
-        'accept': 'application/json'
-      }
+        method: 'GET',
+        headers: {
+            'accept': 'application/json'
+        }
+    })
+        .then((response) => {
+            return response.json()
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
+
+export async function delete_item(api_path, item_id, token) {
+    console.log(BASE_URL + api_path + item_id)
+    return fetch(BASE_URL + api_path + item_id,
+    {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        }
     })
     .then((response) => {
-      return response.json()
+        return response
     })
     .catch((error) => {
-      console.log(error)
+        console.log(error)
     })
-  }
- 
-export async function delete_item(api_path, item_id) {
-return fetch(BASE_URL + api_path, {
-    method: 'GET',
-    headers: {
-    'accept': 'application/json'
-    }
-})
-.then((response) => {
-    return response.json()
-})
-.catch((error) => {
-    console.log(error)
-})
 }
-  
+
 
 export const API_PATHS = {
     deposit: '/api/deposit',
@@ -44,12 +47,12 @@ export const API_PATHS = {
     extract_type: '/api/extract_info/extract_type/',
     address: '/api/address/',
     city: '/api/address/city/',
-    state: '/api/address/state/',   
+    state: '/api/address/state/',
     growth_medium: '/api/fungi_info/growth_medium/',
     growth_condition: '/api/fungi_info/growth_condition/',
     origin_matrix: '/api/fungi_info/origin_matrix/',
     treatments: '/api/myco_info/treatment/',
-    organism: '/api/myco_info/organism/',
+    organisms: '/api/myco_info/organism/',
     organism_type: '/api/myco_info/organism_type/',
     name_lab: '/api/myco_info/name_lab/',
     nomeclature: '/api/myco_info/nomeclature/',
@@ -66,6 +69,9 @@ export const API_PATHS = {
     fungi_family: '/api/fungi_taxonomy/family/',
     fungi_genus: '/api/fungi_taxonomy/genus/',
     fungi_species: '/api/fungi_taxonomy/species/',
+    myco: '/api/mycotheque/',
+    fungi: '/api/fungus/',
+    plant_extract: '/api/extract/'
 }
 
 
