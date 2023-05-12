@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import FormLabel from '../../shared/FormLabel';
+import FormLabel from 'src/components/shared/FormLabel';
 import Button from 'react-bootstrap/Button';
 
 

@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import Form from 'react-bootstrap/Form'
-import FormLabel from '../../../shared/FormLabel';
+import FormLabel from 'src/components/shared/FormLabel';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useEffect, useState } from 'react';

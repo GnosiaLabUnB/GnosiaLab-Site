@@ -6,12 +6,12 @@ import * as yup from 'yup';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import FormLabel from '../../../shared/FormLabel';
+import FormLabel from 'src/components/shared/FormLabel';
 
-import Notificaton from '../../shared/Notification';
-import NotificationCenter from '../../shared/NotificationCenter';
+import Notificaton from 'src/components/dashboard/shared/Notification';
+import NotificationCenter from 'src/components/dashboard/shared/NotificationCenter';
 
-import { invite_user } from '../../../../services/auth';
+import { invite_user } from 'src/services/auth';
 
 
 const schema = yup.object().shape({

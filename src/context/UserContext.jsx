@@ -3,7 +3,7 @@ import { createContext, useContext, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
-import * as api from '../services/auth.js';
+import * as api from 'src/services/auth';
 
 const UserContext = createContext();
 

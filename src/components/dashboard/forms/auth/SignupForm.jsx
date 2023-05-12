@@ -11,10 +11,10 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import FormLabel from '../../../shared/FormLabel';
 
-import { useAuth } from "../../../../context/UserContext";
-import { signup } from '../../../../services/auth';
+import FormLabel from 'src/components/shared/FormLabel';
+import { useAuth } from "src/context/UserContext";
+import { signup } from 'src/services/auth';
 
 YupPassword(yup);
 

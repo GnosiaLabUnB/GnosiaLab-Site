@@ -3,14 +3,15 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import Form from 'react-bootstrap/Form'
-import FormLabel from '../../../shared/FormLabel';
+import FormLabel from 'src/components/shared/FormLabel';
 import Col from 'react-bootstrap/Col';
 
 import { useEffect, useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 
 import { API_PATHS } from 'src/services/base';
-import { selectStyle, form_group_classname, selectClassName, get_options, create_entity } from '../helpers';
+import { selectStyle, form_group_classname,
+         selectClassName, get_options, create_entity } from 'src/components/dashboard/forms/helpers';
 
 function DepositForm(props) {
 

@@ -3,13 +3,13 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import Form from 'react-bootstrap/Form'
-import FormLabel from '../../../shared/FormLabel';
+import FormLabel from 'src/components/shared/FormLabel';
 import Col from 'react-bootstrap/Col';
 
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
-import { API_PATHS } from '../../../../services/base';
+import { API_PATHS } from 'src/services/base';
 import { selectStyle, form_group_classname, selectClassName, get_options, create_entity } from '../helpers';
 
 function PlantSpeciesForm(props) {
@@ -119,10 +119,13 @@ function PlantSpeciesForm(props) {
                             name="family"
                             value={values.family}
                             options={familyOpt}
+                            isDisabled={isLoading}
+                            isLoading={isLoading}
                             className={selectClassName("family", touched, errors)}
                             styles={selectStyle("family", touched, errors)}
                             onBlur={() => setFieldTouched("family")}
-                            onChange={async (e) => await setFieldValue('family', e)}/>
+                            onChange={async (e) => await setFieldValue('family', e)}
+                            onCreateOption={(e) => handleCreate(e, API_PATHS.state)}/>
                         <Form.Control.Feedback type="invalid" tooltip>
                             {errors.family}
                         </Form.Control.Feedback>

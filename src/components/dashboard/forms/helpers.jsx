@@ -1,5 +1,5 @@
-import { create_item, get_all } from '../../../services/base';
-import * as shared from '../../../services/shared';
+import { create_item, get_all } from 'src/services/base';
+import * as shared from 'src/services/shared';
 
 
 export function selectStyle(select_name, touched, errors) {

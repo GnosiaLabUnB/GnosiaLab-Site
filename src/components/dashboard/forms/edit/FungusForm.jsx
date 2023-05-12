@@ -3,16 +3,16 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import Form from 'react-bootstrap/Form'
-import FormLabel from '../../../shared/FormLabel';
+import FormLabel from 'src/components/shared/FormLabel';
 import Col from 'react-bootstrap/Col';
 
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
-import { get_all } from '../../../../services/base';
-import { selectStyle, form_group_classname, selectClassName } from '../helpers';
+import { get_all } from 'src/services/base';
+import { selectStyle, form_group_classname, selectClassName } from 'src/components/dashboard/forms/helpers';
 
-import * as shared from '../../../../services/shared';
+import * as shared from 'src/services/shared';
 
 function FungusForms(props) {
 
@@ -45,29 +45,29 @@ function FungusForms(props) {
             });
         }
         get_options()
-    }, [props.entity])
+    }, [props.entity, props.parent, props.parent_path])
 
 
     function customSubmit(schema) {
         
         let submit_schema = {}
 
-        if (props.parent == "genus") {
+        if (props.parent === "genus") {
             submit_schema = {
                 description: schema.description,
                 genus_id: schema.parent ? schema.parent.value : null
             }
-        } else if (props.parent == "fungus_class") {
+        } else if (props.parent === "fungus_class") {
             submit_schema = {
                 description: schema.description,
                 class_id: schema.parent ? schema.parent.value : null
             }
-        } else if (props.parent == "family") {
+        } else if (props.parent === "family") {
             submit_schema = {
                 description: schema.description,
                 family_id: schema.parent ? schema.parent.value : null
             }
-        } else if (props.parent == "order") {
+        } else if (props.parent === "order") {
             submit_schema = {
                 description: schema.description,
                 order_id: schema.parent ? schema.parent.value : null

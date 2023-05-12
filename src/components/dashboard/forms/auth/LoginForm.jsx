@@ -10,10 +10,10 @@ import * as yup from 'yup';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
-import FormLabel from '../../../shared/FormLabel';
+import FormLabel from 'src/components/shared/FormLabel';
 
 
-import { useAuth } from "../../../../context/UserContext";
+import { useAuth } from "src/context/UserContext";
 
 
 const schema = yup.object().shape({
