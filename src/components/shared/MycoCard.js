@@ -84,9 +84,9 @@ class MycoCard extends React.Component {
                                 </p>
                             </Col>
                             <Col lg={6}>
-                                <Button className="float-end" variant="outline-info" size="sm" onClick={() => this.setState({ infoModalShow: true })}>Info</Button>
-                                <Button className="float-end me-2" variant="outline-warning" size="sm" onClick={() => this.setState({ modalShow: true })}>Edit</Button>
-                                <Button className="float-end me-2" variant="outline-danger" size="sm" onClick={() => this.setState({ deleteModalShow: true })}>Delete</Button>
+                                <Button className="float-end" variant="info" size="sm" onClick={() => this.setState({ infoModalShow: true })}>Info</Button>
+                                <Button className="float-end me-2" variant="warning" size="sm" onClick={() => this.setState({ modalShow: true })}>Edit</Button>
+                                <Button className="float-end me-2" variant="danger" size="sm" onClick={() => this.setState({ deleteModalShow: true })}>Delete</Button>
                             </Col>
                         </Row>
                     </Card.Footer>

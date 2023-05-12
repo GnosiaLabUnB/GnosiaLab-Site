@@ -13,7 +13,7 @@ import DeleteModal from '../../components/dashboard/shared/DeleteModal';
 
 import { API_PATHS, get_all } from '../../services/base.js';
 
-import { AiFillEdit } from 'react-icons/ai'
+import EditModal from '../../components/dashboard/shared/EditModal';
 
 
 class EditView extends React.Component {
@@ -25,16 +25,39 @@ class EditView extends React.Component {
       del_entity_desc: '',
       del_text: '',
       modal_show: false,
-      api_path: null
+      api_path: null,
+      api_label: '',
+      edit_modal_show: false,
+      entity: null
     }
+
+    
   }
 
+  sort_func = (a,b) => { return a.id - b.id}
+
+
+  closeEditModal = () => { this.setState({ edit_modal_show: false }); }
   closeDeleteModal = () => { this.setState({ modal_show: false }); }
   modalCallback = (id = null, caller = null) => {
     if (id !== null) {
-      this.setState({result: this.state.result.filter(function (item) {
-        return item["id"] !== id
-      })});
+      this.setState({
+        result: this.state.result.filter(function (item) {
+          return item["id"] !== id
+        }).sort(this.sort_func)
+      });
+    }
+  }
+
+  editModalCallback = (res=null, caller=null) => {
+    if (res){
+      let new_list = this.state.result.filter(function (item) {
+        return item["id"] !== res.id
+      })
+      
+      this.setState({
+        result: new_list.concat(res).sort(this.sort_func)
+      })
     }
   }
 
@@ -42,15 +65,15 @@ class EditView extends React.Component {
 
     let key_type = this.state.api_path
 
-    if (key_type === API_PATHS.address){
+    if (key_type === API_PATHS.address) {
       return item["location"]
-    } else if (key_type === API_PATHS.vegetation){
+    } else if (key_type === API_PATHS.vegetation) {
       return item["local"] + ' - ' + item['general']
-    } else if (key_type === API_PATHS.nomeclature){
+    } else if (key_type === API_PATHS.nomeclature) {
       return item["scientific_name"]
-    } else if (key_type === API_PATHS.geolocation){
+    } else if (key_type === API_PATHS.geolocation) {
       return "Lat: " + item["latitude"] + "; Long: " + item["longitude"]
-    } else if (key_type === API_PATHS.plant_organ){
+    } else if (key_type === API_PATHS.plant_organ) {
       return item["organ"]
     } else {
       return item["description"]
@@ -90,9 +113,11 @@ class EditView extends React.Component {
       { value: API_PATHS.geolocation, label: 'Geolocation' },
       { value: API_PATHS.box, label: 'Box' },
       { value: API_PATHS.freezer, label: 'Freezer' },
-      // { value: 'vanilla', label: 'Deposit Data' },
-      // { value: 'vanilla', label: 'Herbarium' },
-      // { value: 'vanilla', label: 'Collector Name' },
+      { value: API_PATHS.collectors_names, label: 'Collectors Names' },
+      { value: API_PATHS.herbarium, label: 'Herbarium' },
+      { value: API_PATHS.deposit, label: 'Deposit Data' },
+      { value: API_PATHS.collectors, label: 'Collector' },
+      { value: API_PATHS.deposit_collectors, label: 'Deposit/Collector' },
     ]
 
     return (
@@ -110,7 +135,8 @@ class EditView extends React.Component {
               let query_result = await get_all(e.value)
               this.setState({
                 api_path: e.value,
-                result: query_result
+                api_label: e.label,
+                result: query_result.sort(this.sort_func)
               }, () => {
                 console.log(this.state.result);
               });
@@ -138,14 +164,22 @@ class EditView extends React.Component {
                 {
                   this.state.result.length > 0 && (
                     this.state.result?.map((_, i) =>
-                      <tr>
+                      <tr key={i}>
                         <td>{this.state.result[i]["id"]}</td>
                         <TableRows item={this.state.result[i]} />
                         <td className='text-center'>
-                          <AiFillEdit color={"var(--bs-dark)"} className='mb-1 text-center' size={20} />
+                          <Button size="sm" variant="warning"
+                            onClick={() => {
+                              this.setState({
+                                edit_modal_show: true,
+                                entity: this.state.result[i]
+                              })
+                            }}>
+                            Edit
+                          </Button>
                         </td>
                         <td className='text-center'>
-                          <Button size="sm" variant="secondary"
+                          <Button size="sm" variant="danger"
                             onClick={() => {
                               this.setState({
                                 del_entity_id: this.state.result[i]["id"],
@@ -154,10 +188,8 @@ class EditView extends React.Component {
                                 modal_show: true
                               })
                             }}>
-                              Delete
-                            {/* <AiFillDelete color={"var(--bs-danger)"} className='mb-1 text-center' size={20} /> */}
+                            Delete
                           </Button>
-
                         </td>
                       </tr>
 
@@ -176,6 +208,17 @@ class EditView extends React.Component {
           delete_entity_desc={this.state.del_entity_desc}
           delete_entity_id={this.state.del_entity_id}
           api_path={this.state.api_path} />
+
+        <EditModal
+          api_path={this.state.api_path}
+          entity_type={this.state.api_label}
+          show={this.state.edit_modal_show}
+          close={this.closeEditModal}
+          entity={this.state.entity}
+          callback={this.editModalCallback}
+        />
+
+
       </>
     )
   }

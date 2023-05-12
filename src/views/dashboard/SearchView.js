@@ -7,10 +7,11 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import HeaderTitle from '../../components/dashboard/shared/HeaderTitle';
-import ExtratoForm from '../../components/dashboard/search/ExtratoForm';
-import FungoForm from '../../components/dashboard/search/FungoForm';
-import MicotecaForm from '../../components/dashboard/search/MicotecaForm';
-import AllForm from '../../components/dashboard/search/AllForm';
+
+import ExtratoForm from '../../components/dashboard/forms/search/ExtratoForm';
+import FungoForm from '../../components/dashboard/forms/search/FungoForm';
+import MicotecaForm from '../../components/dashboard/forms/search/MicotecaForm';
+import AllForm from '../../components/dashboard/forms/search/AllForm';
 
 import * as shared from '../../services/shared.js'
 import { API_PATHS, get_all } from '../../services/base.js'

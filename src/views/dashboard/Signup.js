@@ -2,7 +2,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import SignupForm from '../../components/dashboard/auth/SignupForm'
+import SignupForm from '../../components/dashboard/forms/auth/SignupForm'
 
 import { ReactComponent as LoginImage } from "../../assets/images/undraw_scientist.svg";
 import Container from 'react-bootstrap/Container';

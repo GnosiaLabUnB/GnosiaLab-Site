@@ -38,7 +38,7 @@ function DeleteModal(props) {
                 show={props.show}
                 variant={'danger'}
                 centered
-                onHide={() => props.callback()}
+                onHide={() => props.close()}
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Confirm Action</Modal.Title>

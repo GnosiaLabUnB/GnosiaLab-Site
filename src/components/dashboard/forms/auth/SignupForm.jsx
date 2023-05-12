@@ -11,10 +11,10 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import FormLabel from '../../shared/FormLabel';
+import FormLabel from '../../../shared/FormLabel';
 
-import { useAuth } from "../../../context/UserContext";
-import { signup } from '../../../services/auth';
+import { useAuth } from "../../../../context/UserContext";
+import { signup } from '../../../../services/auth';
 
 YupPassword(yup);
 
@@ -98,7 +98,7 @@ function SignupForm() {
                                     type="text"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    isValid={touched.firstname && !errors.fistname}
+                                    isValid={touched.firstname && !errors.firstname}
                                     isInvalid={touched.firstname && !!errors.firstname}
                                     placeholder="Name" />
                                 <Form.Control.Feedback type="invalid" tooltip>

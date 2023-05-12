@@ -33,12 +33,53 @@ export async function delete_item(api_path, item_id, token) {
     })
 }
 
+export async function update_item(api_path, item_id, body, token) {
+    console.log(BASE_URL + api_path + item_id)
+    // Body need yo be a dict
+    return fetch(BASE_URL + api_path + item_id,
+    {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(body)
+    })
+    .then((response) => {
+        return response
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
+export async function create_item(api_path, body, token) {
+    console.log(BASE_URL + api_path)
+    // Body need yo be a dict
+    return fetch(BASE_URL + api_path,
+    {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(body)
+    })
+    .then((response) => {
+        return response
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
 
 export const API_PATHS = {
-    deposit: '/api/deposit',
+    deposit: '/api/deposit/',
     collectors: '/api/deposit/collectors/',
     herbarium: '/api/deposit/herbarium/',
     collectors_names: '/api/deposit/collectors_name/',
+    deposit_collectors: '/api/deposit/deposit_collectors/',
     vegetation: '/api/vegetation/',
     origin: '/api/extract_info/origin/',
     taxo_sys: '/api/extract_info/taxonomic_sys/',

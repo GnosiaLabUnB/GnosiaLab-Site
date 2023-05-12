@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import SubHeaderTitle from '../../components/dashboard/shared/SubHeaderTitle';
 import TeamTable from '../../components/dashboard/team/TeamTable';
 import HeaderTitle from '../../components/dashboard/shared/HeaderTitle';
-import InviteForm from '../../components/dashboard/team/InviteForm';
+import InviteForm from '../../components/dashboard/forms/auth/InviteForm';
 
 import { get_all_user, get_all_invited, get_user } from '../../services/auth';
 import { useAuth } from "../../context/UserContext";
