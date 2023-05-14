@@ -35,8 +35,8 @@ function PlantSpeciesForm(props) {
         setIsLoading(true);
         let option = await create_entity(inputValue, path, props.token)
         setFamilyOpt((prev) => [...prev, option]);
-        setFamilyDefault(option);
         setIsLoading(false);
+        return option
     };
 
 
@@ -125,7 +125,10 @@ function PlantSpeciesForm(props) {
                             styles={selectStyle("family", touched, errors)}
                             onBlur={() => setFieldTouched("family")}
                             onChange={async (e) => await setFieldValue('family', e)}
-                            onCreateOption={(e) => handleCreate(e, API_PATHS.state)}/>
+                            onCreateOption={async (e) => {
+                                let new_opt = await handleCreate(e, API_PATHS.plant_family)
+                                setFieldValue('family', new_opt)
+                            }} />
                         <Form.Control.Feedback type="invalid" tooltip>
                             {errors.family}
                         </Form.Control.Feedback>

@@ -93,7 +93,6 @@ class ExtratoForm extends React.Component {
     }
 
 
-
     render() {
         let formclass = "mb-3"
         const radios = [

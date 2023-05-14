@@ -72,13 +72,14 @@ function AddressForm(props) {
        
         if (path === API_PATHS.state) {
             setStatesOpt((prev) => [...prev, option]);
-            setStateDefault(option);
+            // setStateDefault(option);
         } else if (path === API_PATHS.city) {
             setCitiesOpt((prev) => [...prev, option]);
-            setCityDefault(option);
+            // setCityDefault(option);
         }
         
         setIsLoading(false);
+        return option
     };
 
     return (
@@ -165,7 +166,10 @@ function AddressForm(props) {
                             styles={selectStyle("city", touched, errors)}
                             onBlur={() => setFieldTouched("city")}
                             onChange={async (e) => await setFieldValue('city', e)}
-                            onCreateOption={(e) => handleCreate(e, API_PATHS.city)} />
+                            onCreateOption={async (e) => {
+                                let new_opt = await handleCreate(e, API_PATHS.city)
+                                setFieldValue('city', new_opt)
+                            }} />
                         <Form.Control.Feedback type="invalid" tooltip>
                             {errors.city}
                         </Form.Control.Feedback>
@@ -182,7 +186,10 @@ function AddressForm(props) {
                             styles={selectStyle("state", touched, errors)}
                             onBlur={() => setFieldTouched("state")}
                             onChange={async (e) => await setFieldValue('state', e)}
-                            onCreateOption={(e) => handleCreate(e, API_PATHS.state)} />
+                            onCreateOption={async (e) => {
+                                let new_opt = await handleCreate(e, API_PATHS.state)
+                                setFieldValue('state', new_opt)
+                            }}  />
                         <Form.Control.Feedback type="invalid" tooltip>
                             {errors.state}
                         </Form.Control.Feedback>

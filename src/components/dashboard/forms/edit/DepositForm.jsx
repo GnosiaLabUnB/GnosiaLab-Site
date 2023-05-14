@@ -39,13 +39,12 @@ function DepositForm(props) {
         
         if (path === API_PATHS.deposit) {
             setDepositOpt((prev) => [...prev, option]);
-            setDepositDefault(option);
         } else if (path === API_PATHS.collectors) {
             setCollectorOpt((prev) => [...prev, option]);
-            setCollectorDefault(option);
         }
 
         setIsLoading(false);
+        return option
     };
 
     useEffect(() => {
@@ -107,7 +106,10 @@ function DepositForm(props) {
                             styles={selectStyle("deposit", touched, errors)}
                             onBlur={() => setFieldTouched("deposit")}
                             onChange={async (e) => await setFieldValue('deposit', e)} 
-                            onCreateOption={(e) => handleCreate(e, API_PATHS.deposit)} />
+                            onCreateOption={async (e) => {
+                                let new_opt = await handleCreate(e, API_PATHS.deposit)
+                                setFieldValue('deposit', new_opt)
+                            }}  />
                         <Form.Control.Feedback type="invalid" tooltip>
                             {errors.deposit}
                         </Form.Control.Feedback>
@@ -125,7 +127,10 @@ function DepositForm(props) {
                             styles={selectStyle("collector", touched, errors)}
                             onBlur={() => setFieldTouched("collector")}
                             onChange={async (e) => await setFieldValue('collector', e)}
-                            onCreateOption={(e) => handleCreate(e, API_PATHS.collectors)} />
+                            onCreateOption={async (e) => {
+                                let new_opt = await handleCreate(e, API_PATHS.collectors)
+                                setFieldValue('collector', new_opt)
+                            }}  />
                         <Form.Control.Feedback type="invalid" tooltip>
                             {errors.collector}
                         </Form.Control.Feedback>

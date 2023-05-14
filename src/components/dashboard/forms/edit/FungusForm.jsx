@@ -73,7 +73,6 @@ function FungusForms(props) {
                 order_id: schema.parent ? schema.parent.value : null
             }
         }
-        console.log(submit_schema)
         props.submit(submit_schema)
     }
 

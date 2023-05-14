@@ -28,7 +28,7 @@ function OrganismTypeForm(props) {
 
     const schema = yup.object().shape({
         description: yup.string().required("Required"),
-        organism: react_select_schema.nullable("Required"),
+        organism: react_select_schema.required("Required"),
     })
 
 
@@ -56,8 +56,8 @@ function OrganismTypeForm(props) {
         setIsLoading(true);
         let option = await create_entity(inputValue, path, props.token)
         setOrganismOpt((prev) => [...prev, option]);
-        setOrganismDefault(option);
         setIsLoading(false);
+        return option
     };
 
 
@@ -110,7 +110,10 @@ function OrganismTypeForm(props) {
                             styles={selectStyle("organism", touched, errors)}
                             onBlur={() => setFieldTouched("organism")}
                             onChange={ async (e) => await setFieldValue('organism', e) } 
-                            onCreateOption={(e) => handleCreate(e, API_PATHS.organism)} />
+                            onCreateOption={async (e) => {
+                                let new_opt = await handleCreate(e, API_PATHS.organism)
+                                setFieldValue('organism', new_opt)
+                            }} />
                         <Form.Control.Feedback type="invalid" tooltip>
                             {errors.organism}
                         </Form.Control.Feedback>

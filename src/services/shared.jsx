@@ -11,7 +11,7 @@ export function opt_creator_vegetation(v) {
 export function opt_creator_deposit_collector(v) {
   v = {
     value: v["id"],
-    label: v["number"]
+    label: "Deposit: " + v.deposit["description"] + " Collector: " + v.collector["description"]
   };
   return v;
 }

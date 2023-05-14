@@ -1,4 +1,4 @@
-import { create_item, get_all } from 'src/services/base';
+import { API_PATHS, create_item, get_all } from 'src/services/base';
 import * as shared from 'src/services/shared';
 
 
@@ -37,15 +37,34 @@ export function selectClassName(name, touched, errors) {
 export const form_group_classname = "position-relative mb-3";
 
 export async function create_entity(inputValue, path, token) {
-    let body = {
-        "description": inputValue
+
+    let body = {}
+    let field = ""
+    if (path === API_PATHS.plant_organ) {
+        body = {
+            "organ": inputValue
+        }
+        field = "organ"
+    } else if (path === API_PATHS.plant_species) {
+        body = {
+            "description": inputValue[0],
+            "curr_taxo_name": inputValue[0],
+            "family_id": inputValue[1]
+        }
+        field = "description"
+    } else {
+        body = {
+            "description": inputValue
+        }
+        field = "description"
     }
+    console.log(body)
     const response = await create_item(path, body, token)
     if (response.ok) {
         let res = await response.json()
         return {
             value: res.id,
-            label: res.description
+            label: res[field]
         } 
     }
 }
